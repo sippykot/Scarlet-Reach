@@ -30,6 +30,8 @@
 	var/last_moan = 0
 	var/last_pain = 0
 	var/aphrodisiac = 1 //1 by default, acts as a multiplier on arousal gain. If this is different than 1, set/freeze arousal is disabled.
+	var/mob/living/carbon/human/knotted_owner = null //whom has the knot
+	var/mob/living/carbon/human/knotted_recipient = null //whom took the knot
 	/// Which zones we are using in the current action.
 	var/using_zones = list()
 
@@ -149,11 +151,87 @@
 		playsound(target, pick(list('sound/misc/mat/mouthend (1).ogg','sound/misc/mat/mouthend (2).ogg')), 100, FALSE, ignore_walls = FALSE)
 	else
 		playsound(target, 'sound/misc/mat/endin.ogg', 50, TRUE, ignore_walls = FALSE)
+		if(user != target)
+			attempt_to_tie_knot()
 	after_ejaculation()
 	if(!oral)
 		after_intimate_climax()
-	
 
+/datum/sex_controller/proc/attempt_to_tie_knot()
+	if(!user.sexcon.can_use_penis())
+		return
+	if(user.sexcon.considered_limp())
+		return
+	var/obj/item/organ/penis/penis = user.getorganslot(ORGAN_SLOT_PENIS)
+	if(!penis || penis.penis_type != PENIS_TYPE_KNOTTED)
+		return
+	target.apply_status_effect(/datum/status_effect/debuff/submissive)
+	if(target.apply_damage(50, BRUTE, BODY_ZONE_CHEST))
+		target.Stun(80)
+	user.Stun(30)
+	if (!QDELETED(knotted_recipient) && knotted_recipient != target || !QDELETED(knotted_owner) && knotted_owner != user) // the two characters have knotted someone else, silently remove status from old characters
+		on_knotted_removed(notify = FALSE)
+	knotted_recipient = target
+	knotted_owner = user
+	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(on_knotted_move))
+	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(on_knotted_tugged))
+	knotted_owner.visible_message(span_notice("[knotted_owner] ties their knot inside of [knotted_recipient]!"), span_notice("I tie my knot inside of [knotted_recipient]."))
+
+/datum/sex_controller/proc/on_knotted_move()
+	SIGNAL_HANDLER
+	if(QDELETED(knotted_owner) || QDELETED(knotted_recipient))
+		on_knotted_removed(notify = FALSE)
+		return
+	if(knotted_owner.sexcon.considered_limp())
+		on_knotted_removed()
+		return
+	if(get_dist(knotted_owner, knotted_recipient) > 2)
+		on_knotted_removed(forceful_removal = TRUE)
+		return
+	for(var/i in 2 to get_dist(knotted_recipient, knotted_owner)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
+		step_towards(knotted_recipient, knotted_owner)
+
+/datum/sex_controller/proc/on_knotted_tugged()
+	SIGNAL_HANDLER
+	if(QDELETED(knotted_owner) || QDELETED(knotted_recipient))
+		on_knotted_removed(notify = FALSE)
+		return
+	if(knotted_owner.sexcon.considered_limp())
+		on_knotted_removed()
+		return
+	if(get_dist(knotted_owner, knotted_recipient) > 2)
+		on_knotted_removed(forceful_removal = TRUE)
+		return
+	for(var/i in 2 to get_dist(knotted_recipient, knotted_owner)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
+		step_towards(knotted_recipient, knotted_owner)
+	knotted_recipient.apply_damage(50, STAMINA, null)
+	knotted_recipient.Stun(15)
+	if(prob(5))
+		knotted_recipient.emote("groan", forced = TRUE)
+		knotted_recipient.sexcon.try_do_pain_effect(PAIN_MED_EFFECT, FALSE)
+	else if(prob(10))
+		knotted_recipient.emote("painmoan", forced = TRUE)
+
+/datum/sex_controller/proc/on_knotted_removed(forceful_removal = FALSE, notify = TRUE)
+	if(!QDELETED(knotted_recipient) && !QDELETED(knotted_owner))
+		if(forceful_removal)
+			knotted_recipient.apply_damage(50, BRUTE, BODY_ZONE_CHEST)
+			knotted_recipient.Stun(80)
+			playsound(knotted_recipient, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2, ignore_walls = FALSE)
+			playsound(knotted_owner, 'sound/misc/mat/segso.ogg', 50, TRUE, -2, ignore_walls = FALSE)
+			knotted_recipient.emote("paincrit", TRUE)
+			if(notify)
+				knotted_owner.visible_message(span_notice("[knotted_owner] yanks their knot out of [knotted_recipient]!"), span_notice("I yank my knot out from [knotted_recipient]."))
+		else if(notify)
+			knotted_owner.visible_message(span_notice("[knotted_owner] slips their knot out of [knotted_recipient]!"), span_notice("I slip my knot out from [knotted_recipient]."))
+			knotted_recipient.emote("painmoan", forced = TRUE)
+		add_cum_floor(get_turf(knotted_recipient))
+	if(knotted_owner)
+		UnregisterSignal(knotted_owner, COMSIG_MOVABLE_MOVED)
+		knotted_owner = null
+	if(knotted_recipient)
+		UnregisterSignal(knotted_recipient, COMSIG_MOVABLE_MOVED)
+		knotted_recipient = null
 
 /datum/sex_controller/proc/ejaculate()
 	log_combat(user, user, "Ejaculated")
@@ -535,6 +613,7 @@
 	var/datum/sex_action/action = SEX_ACTION(current_action)
 	log_combat(user, target, "Started sex action: [action.name]")
 	INVOKE_ASYNC(src, PROC_REF(sex_action_loop))
+	on_knotted_removed()
 
 /datum/sex_controller/proc/sex_action_loop()
 	// Do action loop
