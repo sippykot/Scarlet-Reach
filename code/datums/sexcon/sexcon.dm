@@ -157,13 +157,19 @@
 	if(!oral)
 		after_intimate_climax()
 
+/datum/sex_controller/proc/knot_penis_type()
+	var/obj/item/organ/penis/penis = user.getorganslot(ORGAN_SLOT_PENIS)
+	switch(penis.penis_type)
+		if(PENIS_TYPE_KNOTTED,PENIS_TYPE_TAPERED_DOUBLE_KNOTTED,PENIS_TYPE_BARBED_KNOTTED)
+			return TRUE
+	return FALSE
+
 /datum/sex_controller/proc/knot_try()
 	if(!user.sexcon.can_use_penis())
 		return
 	if(user.sexcon.considered_limp())
 		return
-	var/obj/item/organ/penis/penis = user.getorganslot(ORGAN_SLOT_PENIS)
-	if(!penis || penis.penis_type != PENIS_TYPE_KNOTTED)
+	if(!user.sexcon.knot_penis_type()) // don't have that dog in 'em
 		return
 	target.apply_status_effect(/datum/status_effect/debuff/submissive)
 	if(target.apply_damage(50, BRUTE, BODY_ZONE_CHEST))
