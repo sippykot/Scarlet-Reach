@@ -70,7 +70,7 @@
 		switch(H.age)
 			if(AGE_MIDDLEAGED)
 				change_stat("speed", -1)
-				change_stat("endurance", 1)
+				change_stat("constitution", 1)
 			if(AGE_OLD)
 				change_stat("strength", -1)
 				change_stat("speed", -2)
