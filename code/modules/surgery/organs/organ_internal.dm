@@ -101,7 +101,12 @@
 		humanized.update_body_parts(TRUE)
 //	START_PROCESSING(SSobj, src)
 
-
+/obj/item/organ/forceMove(atom/destination)
+	if((organ_flags & ORGAN_INTERNAL_ONLY) && last_owner)
+		qdel(src)
+		return
+	..()
+	
 /obj/item/organ/proc/on_find(mob/living/finder)
 	return
 
@@ -210,7 +215,11 @@
 	if(owner)
 		// The special flag is important, because otherwise mobs can die
 		// while undergoing transformation into different mobs.
-		Remove(owner, special=TRUE)
+		// note how the inline comment is done: we have that there for future coders
+		// who we don't want to drive to depression and drug abuse; important stuff! kwargs get fucky
+		// in nested definition calls so it's typically wisest to use positiional and
+		// inline comment what position is specifying what if it's not obvious at a glance
+		INVOKE_ASYNC(src, PROC_REF(Remove), owner, /*special=*/TRUE)
 	last_owner = null
 	STOP_PROCESSING(SSobj, src)
 	return ..()
