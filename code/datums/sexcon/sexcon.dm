@@ -191,6 +191,9 @@
 	if(knotted_owner.sexcon.considered_limp())
 		knot_remove()
 		return
+	if(knotted_owner.m_intent == MOVE_INTENT_RUN && (knotted_owner.mobility_flags & MOBILITY_STAND)) // pop! stops idiot werewolves from dragging the wandering, unguarded princess around like a unleashed pitbull
+		knot_remove(forceful_removal = TRUE)
+		return
 	if(get_dist(knotted_owner, knotted_recipient) > 2)
 		knot_remove(forceful_removal = TRUE)
 		return
@@ -211,7 +214,10 @@
 	for(var/i in 2 to get_dist(knotted_recipient, knotted_owner)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
 		step_towards(knotted_recipient, knotted_owner)
 	knotted_recipient.apply_damage(50, STAMINA, null)
-	knotted_recipient.Stun(15)
+	if(knotted_recipient.m_intent == MOVE_INTENT_RUN && (knotted_recipient.mobility_flags & MOBILITY_STAND)) // running only makes this worse, darling
+		knotted_recipient.Knockdown(10)
+	else
+		knotted_recipient.Stun(15)
 	if(prob(5))
 		knotted_recipient.emote("groan", forced = TRUE)
 		knotted_recipient.sexcon.try_do_pain_effect(PAIN_MED_EFFECT, FALSE)
