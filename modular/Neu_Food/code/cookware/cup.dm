@@ -146,6 +146,7 @@
 /obj/item/reagent_containers/glass/cup/skull
 	name = "skull goblet"
 	desc = "The hollow eye sockets tell me of forgotten, dark rituals."
+	dropshrink = 1
 	icon_state = "skull"
 
 /obj/item/reagent_containers/glass/cup/ceramic
