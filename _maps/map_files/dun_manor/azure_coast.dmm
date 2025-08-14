@@ -130,8 +130,7 @@
 /area/rogue/under/cave/mazedungeon)
 "aw" = (
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
+	icon_state = "tablewood1"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/shelter)
@@ -334,7 +333,7 @@
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/cave/mazedungeon)
 "bh" = (
-/obj/item/roguebin/water/gross,
+/obj/structure/roguebin/water/gross,
 /turf/open/floor/rogue/cobblerock,
 /area/rogue/indoors/shelter)
 "bk" = (
@@ -500,8 +499,7 @@
 /area/rogue/indoors/cave)
 "cr" = (
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
+	icon_state = "tablewood1"
 	},
 /obj/item/reagent_containers/glass/cup/wooden{
 	pixel_x = 6;
@@ -1012,8 +1010,7 @@
 /area/rogue/outdoors/beach)
 "fL" = (
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
+	icon_state = "tablewood1"
 	},
 /obj/item/reagent_containers/glass/cup/wooden,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -1430,7 +1427,6 @@
 "iA" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1";
-	dir = 1
 	},
 /obj/effect/spawner/lootdrop/roguetown/dungeon/misc,
 /turf/open/floor/rogue/blocks,
@@ -1721,7 +1717,7 @@
 /turf/open/transparent/openspace,
 /area/rogue/indoors/cave)
 "kO" = (
-/obj/item/roguebin/water,
+/obj/structure/roguebin/water,
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/outdoors/beach)
 "kP" = (
@@ -1937,8 +1933,7 @@
 /area/rogue/indoors/cave)
 "mt" = (
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
+	icon_state = "tablewood1"
 	},
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/shelter)
@@ -2543,7 +2538,7 @@
 /turf/open/floor/rogue/dirt,
 /area/rogue/under/cave/orcdungeon)
 "qz" = (
-/obj/item/roguebin/water/gross,
+/obj/structure/roguebin/water/gross,
 /turf/open/floor/rogue/dirt,
 /area/rogue/under/cave/mazedungeon)
 "qA" = (
@@ -2782,8 +2777,7 @@
 /area/rogue/under/cave/orcdungeon)
 "rT" = (
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
+	icon_state = "tablewood1"
 	},
 /obj/effect/spawner/lootdrop/roguetown/dungeon/money,
 /turf/open/floor/rogue/ruinedwood/spiral,
@@ -2855,8 +2849,7 @@
 /area/rogue/under/cave/orcdungeon)
 "sv" = (
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
+	icon_state = "tablewood1"
 	},
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/shelter)
@@ -3216,7 +3209,7 @@
 	},
 /area/rogue/under/cave/dukecourt)
 "vf" = (
-/obj/item/roguebin/water/gross,
+/obj/structure/roguebin/water/gross,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/cave/orcdungeon)
 "vg" = (
@@ -3572,8 +3565,7 @@
 /area/rogue/under/cave/orcdungeon)
 "xr" = (
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
+	icon_state = "tablewood1"
 	},
 /obj/item/roguecoin/copper/pile,
 /turf/open/floor/rogue/ruinedwood/turned,
@@ -4040,8 +4032,7 @@
 /area/rogue/outdoors/beach/forest)
 "AF" = (
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
+	icon_state = "tablewood1"
 	},
 /obj/item/rogueweapon/huntingknife/cleaver,
 /turf/open/floor/rogue/blocks,
@@ -4417,7 +4408,7 @@
 /turf/open/floor/rogue/ruinedwood/chevron,
 /area/rogue/under/cave/dukecourt)
 "CP" = (
-/obj/item/roguebin/water/gross,
+/obj/structure/roguebin/water/gross,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/under/cave/orcdungeon)
 "CQ" = (
@@ -4451,7 +4442,7 @@
 /area/rogue/indoors/cave)
 "CW" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
-/obj/item/roguebin/water/gross,
+/obj/structure/roguebin/water/gross,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/cave/orcdungeon)
 "CZ" = (
@@ -4838,7 +4829,7 @@
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/indoors/cave)
 "FK" = (
-/obj/item/roguebin/water/gross,
+/obj/structure/roguebin/water/gross,
 /turf/open/floor/rogue/blocks,
 /area/rogue/outdoors/beach)
 "FP" = (
@@ -5569,8 +5560,7 @@
 	dir = 4
 	},
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
+	icon_state = "tablewood1"
 	},
 /obj/item/reagent_containers/glass/bottle,
 /turf/open/floor/rogue/woodturned,
@@ -6465,8 +6455,7 @@
 /area/rogue/under/cave/dukecourt)
 "Qx" = (
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
+	icon_state = "tablewood1"
 	},
 /obj/item/reagent_containers/glass/bottle/rogue/wine,
 /turf/open/floor/rogue/wood,
@@ -7450,8 +7439,7 @@
 /area/rogue/outdoors/beach)
 "Xe" = (
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
+	icon_state = "tablewood1"
 	},
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/indoors/shelter)
