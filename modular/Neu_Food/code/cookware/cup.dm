@@ -16,7 +16,7 @@
 	experimental_inhand = FALSE
 	volume = 24
 	obj_flags = CAN_BE_HIT
-	sellprice = 1
+	sellprice = 7
 	drinksounds = list('sound/items/drink_cup (1).ogg','sound/items/drink_cup (2).ogg','sound/items/drink_cup (3).ogg','sound/items/drink_cup (4).ogg','sound/items/drink_cup (5).ogg')
 	fillsounds = list('sound/items/fillcup.ogg')
 	anvilrepair = /datum/skill/craft/blacksmithing
@@ -44,14 +44,15 @@
 
 /obj/item/reagent_containers/glass/cup/steel
 	name = "goblet"
-	desc = "A steel goblet, its surface adorned with intricate carvings."
+	desc = "A steel goblet, its surface adorned with studs."
 	icon_state = "steel"
-	sellprice = 10
+	sellprice = 15
 
 /obj/item/reagent_containers/glass/cup/aalloymug
 	name = "decrepit mug"
 	desc = "A decrepit mug. Aeon's grasp is upon its form."
 	icon_state = "amug"
+	sellprice = 0
 
 /obj/item/reagent_containers/glass/cup/aalloygob
 	name = "decrepit goblet"
@@ -61,17 +62,17 @@
 
 /obj/item/reagent_containers/glass/cup/silver
 	name = "silver goblet"
-	desc = "A silver goblet, its surface adorned with intricate carvings and runes."
+	desc = "A silver goblet, its surface carefully polished."
 	icon_state = "silver"
-	sellprice = 30
+	sellprice = 60
 	last_used = 0
 	is_silver = TRUE
 
 /obj/item/reagent_containers/glass/cup/silver/small
 	name = "silver cup"
-	desc = "A silver cup, its surface adorned with intricate carvings and runes."
+	desc = "A silver cup, its surface carefully polished."
 	icon_state = "scup"
-	sellprice = 20
+	sellprice = 40
 
 /obj/item/reagent_containers/glass/cup/silver/pickup(mob/user)
 	. = ..()
@@ -117,22 +118,30 @@
 
 /obj/item/reagent_containers/glass/cup/golden
 	name = "golden goblet"
-	desc = "Adorned with gemstones, this goblet radiates opulence and grandeur."
+	desc = "This goblet radiates opulence and grandeur."
 	icon_state = "golden"
-	sellprice = 50
+	sellprice = 75
 
 /obj/item/reagent_containers/glass/cup/golden/small
 	name = "golden cup"
-	desc = "Adorned with gemstones, this cup radiates opulence and grandeur."
+	desc = "This cup radiates opulence and grandeur."
 	icon_state = "gcup"
-	sellprice = 40
+	sellprice = 50
 
 /obj/item/reagent_containers/glass/cup/golden/poison
-	name = "golden goblet"
-	desc = "Adorned with gemstones, this goblet radiates opulence and grandeur."
-	icon_state = "golden"
-	sellprice = 50
 	list_reagents = list(/datum/reagent/toxin/killersice = 1, /datum/reagent/consumable/ethanol/elfred = 20)
+
+/obj/item/reagent_containers/glass/cup/tin
+	name = "tin goblet"
+	desc = "A tin goblet, cheaper than silver, but with a similar shine!"
+	icon_state = "golden"
+	sellprice = 12
+
+/obj/item/reagent_containers/glass/cup/tin/small
+	name = "tin cup"
+	desc = "A tin cup, cheaper than silver, but with a similar shine!"
+	icon_state = "gcup"
+	sellprice = 8
 
 /obj/item/reagent_containers/glass/cup/skull
 	name = "skull goblet"
