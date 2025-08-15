@@ -210,10 +210,10 @@
 	if(dist > 2)
 		knot_remove(forceful_removal = TRUE)
 		return
-	if(dist <= 1)
+	else if(dist <= 1)
 		knotted_recipient.face_atom(knotted_owner)
 		return
-	for(var/i in 2 to get_dist(knotted_recipient, knotted_owner)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
+	for(var/i in 2 to get_dist(knotted_owner, knotted_recipient)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
 		step_towards(knotted_recipient, knotted_owner)
 
 /datum/sex_controller/proc/knot_tugged()
@@ -229,20 +229,22 @@
 	if(get_dist(knotted_owner, knotted_recipient) > 2)
 		knot_remove(forceful_removal = TRUE)
 		return
-	for(var/i in 2 to get_dist(knotted_recipient, knotted_owner)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
+	for(var/i in 2 to get_dist(knotted_owner, knotted_recipient)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
 		step_towards(knotted_recipient, knotted_owner)
-	knotted_recipient.apply_damage(50, STAMINA, null)
-	if(knotted_recipient.m_intent == MOVE_INTENT_RUN && (knotted_recipient.mobility_flags & MOBILITY_STAND)) // running only makes this worse, darling
-		knotted_recipient.Knockdown(10)
-	else
-		knotted_recipient.Stun(15)
-	if(knotted_recipient.IsStun()) // don't reapply damage if we're still stunned
+	if(knotted_recipient.mobility_flags & MOBILITY_STAND)
+		if(knotted_recipient.m_intent == MOVE_INTENT_RUN) // running only makes this worse, darling
+			knotted_recipient.Knockdown(10)
+			knotted_recipient.Stun(30)
+			knotted_recipient.emote("groan", forced = TRUE)
+			return
+	if(knotted_recipient.IsStun())
 		return
 	if(prob(5))
-		knotted_recipient.emote("groan", forced = TRUE)
+		knotted_recipient.emote("groan")
 		knotted_recipient.sexcon.try_do_pain_effect(PAIN_MED_EFFECT, FALSE)
-	else if(prob(10))
-		knotted_recipient.emote("painmoan", forced = TRUE)
+		knotted_recipient.Stun(15)
+	else if(prob(2))
+		knotted_recipient.emote("painmoan")
 
 /datum/sex_controller/proc/knot_remove(forceful_removal = FALSE, notify = TRUE)
 	if(!QDELETED(knotted_recipient) && !QDELETED(knotted_owner))
