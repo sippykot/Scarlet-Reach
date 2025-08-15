@@ -205,7 +205,15 @@
 	if(QDELETED(knotted_owner) || QDELETED(knotted_recipient))
 		knot_remove(notify = FALSE)
 		return
-	if(knotted_recipient.pulledby == knotted_owner || knotted_owner.pulledby == knotted_recipient)
+	if(prob(10) && knotted_owner.m_intent == MOVE_INTENT_WALK && knotted_recipient in knotted_owner.buckled_mobs) // if the two characters are being held in a fireman carry, let them muturally get pleasure from it
+		var/obj/item/organ/penis/penis = user.getorganslot(ORGAN_SLOT_PENIS)
+		knotted_owner.sexcon.perform_sex_action(knotted_recipient, penis?.penis_size > DEFAULT_PENIS_SIZE ? 6.0 : 3.0, 2, FALSE)
+		knotted_recipient.sexcon.handle_passive_ejaculation()
+		if(prob(50))
+			to_chat(knotted_owner, span_love("I feel [knotted_recipient] tightening over my knot."))
+			to_chat(knotted_recipient, span_love("I feel [knotted_owner] rubbing inside."))
+		return
+	if(knotted_recipient.pulling == knotted_owner || knotted_owner.pulling == knotted_recipient)
 		return
 	if(knotted_owner.sexcon.considered_limp())
 		knot_remove()
@@ -237,7 +245,7 @@
 	if(knotted_owner.stat >= SOFT_CRIT) // only removed if the knot owner is injured/asleep/dead
 		knot_remove(notify = FALSE)
 		return
-	if(knotted_recipient.pulledby == knotted_owner || knotted_owner.pulledby == knotted_recipient)
+	if(knotted_recipient.pulling == knotted_owner || knotted_owner.pulling == knotted_recipient)
 		return
 	if(knotted_owner.sexcon.considered_limp())
 		knot_remove()
