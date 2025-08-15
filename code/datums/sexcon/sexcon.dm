@@ -30,6 +30,7 @@
 	var/last_moan = 0
 	var/last_pain = 0
 	var/aphrodisiac = 1 //1 by default, acts as a multiplier on arousal gain. If this is different than 1, set/freeze arousal is disabled.
+	var/knotted_currently = 0 //quick flag to ensure either party is able to be knotted, as we do not handle the edgecase for multiple knots
 	var/mob/living/carbon/human/knotted_owner = null //whom has the knot
 	var/mob/living/carbon/human/knotted_recipient = null //whom took the knot
 	/// Which zones we are using in the current action.
@@ -167,6 +168,10 @@
 	return FALSE
 
 /datum/sex_controller/proc/knot_try()
+	if(target.sexcon.knotted_currently) // only one lupian at a time, you slut
+		if(user.sexcon.knotted_currently && !QDELETED(knotted_recipient) && knotted_recipient != target) // remove knot from old character if player is attempting to knot another character (although this SHOULD never happen, as doing a new action forces a knot removal)
+			knot_remove(forceful_removal = TRUE)
+		return
 	if(!user.sexcon.can_use_penis())
 		return
 	if(user.sexcon.considered_limp())
@@ -184,6 +189,7 @@
 	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(knot_move))
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(knot_tugged))
 	knotted_owner.visible_message(span_notice("[knotted_owner] ties their knot inside of [knotted_recipient]!"), span_notice("I tie my knot inside of [knotted_recipient]."))
+	user.sexcon.knotted_currently = target.sexcon.knotted_currently = TRUE
 
 /datum/sex_controller/proc/knot_move()
 	SIGNAL_HANDLER
@@ -245,9 +251,11 @@
 		add_cum_floor(get_turf(knotted_recipient))
 	if(knotted_owner)
 		UnregisterSignal(knotted_owner, COMSIG_MOVABLE_MOVED)
+		knotted_owner.sexcon.knotted_currently = FALSE
 		knotted_owner = null
 	if(knotted_recipient)
 		UnregisterSignal(knotted_recipient, COMSIG_MOVABLE_MOVED)
+		knotted_recipient.sexcon.knotted_currently = FALSE
 		knotted_recipient = null
 
 /datum/sex_controller/proc/ejaculate()
