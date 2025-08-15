@@ -248,9 +248,12 @@
 /datum/sex_controller/proc/knot_remove(forceful_removal = FALSE, notify = TRUE)
 	if(!QDELETED(knotted_recipient) && !QDELETED(knotted_owner))
 		if(forceful_removal)
-			knotted_recipient.apply_damage(20, BRUTE, BODY_ZONE_CHEST)
+			var/damage = 40
+			if (knotted_owner.sexcon.arousal > MAX_AROUSAL / 2) // still hard, let it rip like a beyblade
+				damage += 30
+				knotted_recipient.Knockdown(10)
+			knotted_recipient.apply_damage(damage, BRUTE, BODY_ZONE_CHEST)
 			knotted_recipient.Stun(80)
-			knotted_recipient.Knockdown(10)
 			playsound(knotted_recipient, 'sound/misc/mat/pop.ogg', 100, TRUE, -2, ignore_walls = FALSE)
 			playsound(knotted_owner, 'sound/misc/mat/segso.ogg', 50, TRUE, -2, ignore_walls = FALSE)
 			knotted_recipient.emote("paincrit", forced = TRUE)
