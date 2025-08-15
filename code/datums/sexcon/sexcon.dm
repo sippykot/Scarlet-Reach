@@ -178,7 +178,8 @@
 		return
 	if(!user.sexcon.knot_penis_type()) // don't have that dog in 'em
 		return
-	target.apply_status_effect(/datum/status_effect/debuff/submissive)
+	target.apply_status_effect(/datum/status_effect/debuff/knot_tied)
+	user.apply_status_effect(/datum/status_effect/knotted)
 	if(target.apply_damage(50, BRUTE, BODY_ZONE_CHEST))
 		target.Stun(80)
 	user.Stun(30)
@@ -250,6 +251,8 @@
 			knotted_owner.visible_message(span_notice("[knotted_owner] slips their knot out of [knotted_recipient]!"), span_notice("I slip my knot out from [knotted_recipient]."))
 			knotted_recipient.emote("painmoan", forced = TRUE)
 		add_cum_floor(get_turf(knotted_recipient))
+		knotted_recipient.remove_status_effect(/datum/status_effect/debuff/knot_tied)
+		knotted_owner.remove_status_effect(/datum/status_effect/knotted)
 	if(knotted_owner)
 		UnregisterSignal(knotted_owner, COMSIG_MOVABLE_MOVED)
 		knotted_owner.sexcon.knotted_currently = FALSE
@@ -258,6 +261,31 @@
 		UnregisterSignal(knotted_recipient, COMSIG_MOVABLE_MOVED)
 		knotted_recipient.sexcon.knotted_currently = FALSE
 		knotted_recipient = null
+
+/datum/status_effect/debuff/knot_tied
+	id = "knotted"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/knot_tied
+	effectedstats = list("strength" = -5, "constitution" = -3, "endurance" = -2, "speed" = -5)
+
+/datum/status_effect/debuff/knot_tied/on_apply()
+	. = ..()
+	if(!owner.stat)
+		to_chat(owner, span_userdanger("You have been knotted!"))
+
+/datum/status_effect/debuff/knot_tied/on_remove()
+	. = ..()
+
+/atom/movable/screen/alert/status_effect/debuff/knot_tied
+	name = "Knotted"
+	desc = "I feel their knot throb inside of me, I can't move from them."
+
+/datum/status_effect/knotted
+	id = "knotted"
+	alert_type = /atom/movable/screen/alert/status_effect/knotted
+
+/atom/movable/screen/alert/status_effect/knotted
+	name = "Knotted"
+	desc = "I feel my knot throb with warmth, they're stuck to me."
 
 /datum/sex_controller/proc/ejaculate()
 	log_combat(user, user, "Ejaculated")
