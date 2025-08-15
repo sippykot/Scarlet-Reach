@@ -180,9 +180,10 @@
 		return
 	target.apply_status_effect(/datum/status_effect/knot_tied)
 	user.apply_status_effect(/datum/status_effect/knotted)
-	if(force > SEX_FORCE_MID) // if using force above default, give recipient some brute damage
-		if(target.apply_damage(30, BRUTE, BODY_ZONE_CHEST))
-			target.Stun(80)
+	if(force > SEX_FORCE_MID) // if using force above default
+		if(force == SEX_FORCE_EXTREME) // damage if set to max force
+			target.apply_damage(30, BRUTE, BODY_ZONE_CHEST)
+		target.Stun(80) // stun for dramatic effect
 	if (!QDELETED(knotted_recipient) && knotted_recipient != target || !QDELETED(knotted_owner) && knotted_owner != user) // the two characters have knotted someone else, silently remove status from old characters
 		knot_remove(notify = FALSE)
 	knotted_recipient = target
