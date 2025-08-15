@@ -159,6 +159,8 @@
 
 /datum/sex_controller/proc/knot_penis_type()
 	var/obj/item/organ/penis/penis = user.getorganslot(ORGAN_SLOT_PENIS)
+	if(!penis)
+		return FALSE
 	switch(penis.penis_type)
 		if(PENIS_TYPE_KNOTTED,PENIS_TYPE_TAPERED_DOUBLE_KNOTTED,PENIS_TYPE_BARBED_KNOTTED)
 			return TRUE
