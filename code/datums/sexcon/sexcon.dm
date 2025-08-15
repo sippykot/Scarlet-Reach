@@ -188,7 +188,7 @@
 	knotted_owner = user
 	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(knot_move))
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(knot_tugged))
-	knotted_owner.visible_message(span_notice("[knotted_owner] ties their knot inside of [knotted_recipient]!"), span_notice("I tie my knot inside of [knotted_recipient]."))
+	user.visible_message(span_notice("[user] ties their knot inside of [target]!"), span_notice("I tie my knot inside of [target]."))
 	user.sexcon.knotted_currently = target.sexcon.knotted_currently = TRUE
 
 /datum/sex_controller/proc/knot_move()
