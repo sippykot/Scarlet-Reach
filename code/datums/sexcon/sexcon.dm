@@ -218,6 +218,8 @@
 		knotted_recipient.Knockdown(10)
 	else
 		knotted_recipient.Stun(15)
+	if(knotted_recipient.IsStun()) // don't reapply damage if we're still stunned
+		return
 	if(prob(5))
 		knotted_recipient.emote("groan", forced = TRUE)
 		knotted_recipient.sexcon.try_do_pain_effect(PAIN_MED_EFFECT, FALSE)
