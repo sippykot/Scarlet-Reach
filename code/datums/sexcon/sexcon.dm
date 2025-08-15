@@ -211,11 +211,11 @@
 	if(dist > 2)
 		knot_remove(forceful_removal = TRUE)
 		return
-	else if(dist <= 1)
-		knotted_recipient.face_atom(knotted_owner)
-		return
-	for(var/i in 2 to get_dist(knotted_owner, knotted_recipient)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
-		step_towards(knotted_recipient, knotted_owner)
+	else if(dist == 2)
+		for(var/i in 2 to get_dist(knotted_owner, knotted_recipient)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
+			step_towards(knotted_recipient, knotted_owner)
+	knotted_recipient.face_atom(knotted_owner)
+	knotted_owner.set_pull_offsets(knotted_recipient, GRAB_AGGRESSIVE)
 
 /datum/sex_controller/proc/knot_tugged()
 	SIGNAL_HANDLER
@@ -232,6 +232,7 @@
 		return
 	for(var/i in 2 to get_dist(knotted_owner, knotted_recipient)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
 		step_towards(knotted_recipient, knotted_owner)
+	knotted_owner.set_pull_offsets(knotted_recipient, GRAB_AGGRESSIVE)
 	if(knotted_recipient.mobility_flags & MOBILITY_STAND)
 		if(knotted_recipient.m_intent == MOVE_INTENT_RUN) // running only makes this worse, darling
 			knotted_recipient.Knockdown(10)
