@@ -205,6 +205,9 @@
 	if(QDELETED(knotted_owner) || QDELETED(knotted_recipient))
 		knot_remove(notify = FALSE)
 		return
+	if(knotted_owner.client && !knotted_owner.client.prefs.sexable || knotted_recipient.client && !knotted_recipient.client.prefs.sexable) // we respect safewords here, let the players untie themselves
+		knot_remove(notify = FALSE)
+		return
 	if(prob(10) && knotted_owner.m_intent == MOVE_INTENT_WALK && knotted_recipient in knotted_owner.buckled_mobs) // if the two characters are being held in a fireman carry, let them muturally get pleasure from it
 		var/obj/item/organ/penis/penis = user.getorganslot(ORGAN_SLOT_PENIS)
 		knotted_owner.sexcon.perform_sex_action(knotted_recipient, penis?.penis_size > DEFAULT_PENIS_SIZE ? 6.0 : 3.0, 2, FALSE)
@@ -240,6 +243,9 @@
 /datum/sex_controller/proc/knot_tugged()
 	SIGNAL_HANDLER
 	if(QDELETED(knotted_owner) || QDELETED(knotted_recipient))
+		knot_remove(notify = FALSE)
+		return
+	if(knotted_owner.client && !knotted_owner.client.prefs.sexable || knotted_recipient.client && !knotted_recipient.client.prefs.sexable) // we respect safewords here, let the players untie themselves
 		knot_remove(notify = FALSE)
 		return
 	if(knotted_owner.stat >= SOFT_CRIT) // only removed if the knot owner is injured/asleep/dead
