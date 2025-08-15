@@ -219,6 +219,11 @@
 	else if(dist == 2)
 		for(var/i in 2 to get_dist(knotted_owner, knotted_recipient)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
 			step_towards(knotted_recipient, knotted_owner)
+	addtimer(CALLBACK(src, PROC_REF(knot_move_after)), 0.1 SECONDS)
+
+/datum/sex_controller/proc/knot_move_after()
+	if(QDELETED(knotted_owner) || QDELETED(knotted_recipient))
+		return
 	knotted_recipient.face_atom(knotted_owner)
 	knotted_owner.set_pull_offsets(knotted_recipient, GRAB_AGGRESSIVE)
 
@@ -248,6 +253,7 @@
 			knotted_recipient.emote("groan", forced = TRUE)
 			return
 	if(knotted_recipient.IsStun())
+		addtimer(CALLBACK(src, PROC_REF(knot_tugged_after)), 0.1 SECONDS)
 		return
 	if(prob(5))
 		knotted_recipient.emote("groan")
@@ -255,6 +261,12 @@
 		knotted_recipient.Stun(15)
 	else if(prob(2))
 		knotted_recipient.emote("painmoan")
+	addtimer(CALLBACK(src, PROC_REF(knot_tugged_after)), 0.1 SECONDS)
+
+/datum/sex_controller/proc/knot_tugged_after()
+	if(QDELETED(knotted_owner) || QDELETED(knotted_recipient))
+		return
+	knotted_recipient.face_atom(knotted_owner)
 
 /datum/sex_controller/proc/knot_remove(forceful_removal = FALSE, notify = TRUE)
 	if(!QDELETED(knotted_recipient) && !QDELETED(knotted_owner))
