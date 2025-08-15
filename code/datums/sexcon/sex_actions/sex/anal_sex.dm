@@ -77,5 +77,5 @@
 	if(user.sexcon.considered_limp())
 		user.sexcon.perform_sex_action(target, 1.2, 4, FALSE)
 	else
-		user.sexcon.perform_sex_action(target, 2.4, 9*2, FALSE)
+		user.sexcon.perform_sex_action(target, 2.4, 9*1.5, FALSE)
 	target.sexcon.handle_passive_ejaculation()
