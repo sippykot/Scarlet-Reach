@@ -227,6 +227,9 @@
 	if(QDELETED(knotted_owner) || QDELETED(knotted_recipient))
 		knot_remove(notify = FALSE)
 		return
+	if(knotted_owner.stat >= SOFT_CRIT) // only removed if the knot owner is injured/asleep/dead
+		knot_remove(notify = FALSE)
+		return
 	if(knotted_recipient.pulledby == knotted_owner || knotted_owner.pulledby == knotted_recipient)
 		return
 	if(knotted_owner.sexcon.considered_limp())
@@ -274,15 +277,15 @@
 			knotted_recipient.emote("painmoan", forced = TRUE)
 			knotted_recipient.sexcon.try_do_pain_effect(PAIN_MILD_EFFECT, FALSE)
 		add_cum_floor(get_turf(knotted_recipient))
-		knotted_recipient.remove_status_effect(/datum/status_effect/knot_tied)
-		knotted_owner.remove_status_effect(/datum/status_effect/knotted)
+	knotted_owner?.remove_status_effect(/datum/status_effect/knotted)
+	knotted_recipient?.remove_status_effect(/datum/status_effect/knot_tied)
+	knotted_owner?.sexcon.knotted_currently = FALSE
+	knotted_recipient?.sexcon.knotted_currently = FALSE
 	if(knotted_owner)
 		UnregisterSignal(knotted_owner, COMSIG_MOVABLE_MOVED)
-		knotted_owner.sexcon.knotted_currently = FALSE
 		knotted_owner = null
 	if(knotted_recipient)
 		UnregisterSignal(knotted_recipient, COMSIG_MOVABLE_MOVED)
-		knotted_recipient.sexcon.knotted_currently = FALSE
 		knotted_recipient = null
 
 /datum/status_effect/knot_tied
