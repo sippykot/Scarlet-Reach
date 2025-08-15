@@ -310,6 +310,16 @@
 		UnregisterSignal(knotted_recipient, COMSIG_MOVABLE_MOVED)
 		knotted_recipient = null
 
+/mob/living/carbon/human/werewolf_transform() // needed to ensure that we safely remove the tie before transitioning
+	if(src.sexcon.knotted_currently)
+		src.sexcon.knot_remove()
+	return ..()
+
+/mob/living/carbon/human/werewolf_untransform(dead,gibbed) // needed to ensure that we safely remove the tie after transitioning
+	if(src.sexcon.knotted_currently)
+		src.sexcon.knot_remove()
+	return ..()
+
 /datum/status_effect/knot_tied
 	id = "knot_tied"
 	status_type = STATUS_EFFECT_UNIQUE
