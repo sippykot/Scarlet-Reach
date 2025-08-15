@@ -182,7 +182,8 @@
 	user.apply_status_effect(/datum/status_effect/knotted)
 	if(target.apply_damage(50, BRUTE, BODY_ZONE_CHEST))
 		target.Stun(80)
-	user.Stun(30)
+	if(force <= SEX_FORCE_MID) // cause a stun on the knot owner if they're not aggro
+		user.Stun(30)
 	if (!QDELETED(knotted_recipient) && knotted_recipient != target || !QDELETED(knotted_owner) && knotted_owner != user) // the two characters have knotted someone else, silently remove status from old characters
 		knot_remove(notify = FALSE)
 	knotted_recipient = target
