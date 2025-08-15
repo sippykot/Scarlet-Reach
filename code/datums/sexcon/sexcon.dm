@@ -205,8 +205,14 @@
 	if(!is_werewolf && knotted_owner.m_intent == MOVE_INTENT_RUN && (knotted_owner.mobility_flags & MOBILITY_STAND)) // pop
 		knot_remove(forceful_removal = TRUE)
 		return
-	if(get_dist(knotted_owner, knotted_recipient) > 2)
+	if(knotted_recipient.pulledby == knotted_owner || knotted_owner.pulledby == knotted_recipient)
+		return
+	var/dist = get_dist(knotted_owner, knotted_recipient)
+	if(dist > 2)
 		knot_remove(forceful_removal = TRUE)
+		return
+	if(dist <= 1)
+		knotted_recipient.face_atom(knotted_owner)
 		return
 	for(var/i in 2 to get_dist(knotted_recipient, knotted_owner)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
 		step_towards(knotted_recipient, knotted_owner)
@@ -218,6 +224,8 @@
 		return
 	if(knotted_owner.sexcon.considered_limp())
 		knot_remove()
+		return
+	if(knotted_recipient.pulledby == knotted_owner || knotted_owner.pulledby == knotted_recipient)
 		return
 	if(get_dist(knotted_owner, knotted_recipient) > 2)
 		knot_remove(forceful_removal = TRUE)
