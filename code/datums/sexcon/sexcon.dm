@@ -199,7 +199,8 @@
 	if(knotted_owner.sexcon.considered_limp())
 		knot_remove()
 		return
-	if(knotted_owner.m_intent == MOVE_INTENT_RUN && (knotted_owner.mobility_flags & MOBILITY_STAND)) // pop! stops idiot werewolves from dragging the wandering, unguarded princess around like a unleashed pitbull
+	var/is_werewolf = istype(knotted_owner, /mob/living/carbon/human/species/werewolf) //allow werewolves to use their superior lupian power to drag around their prey, simply for the lols
+	if(!is_werewolf && knotted_owner.m_intent == MOVE_INTENT_RUN && (knotted_owner.mobility_flags & MOBILITY_STAND)) // pop
 		knot_remove(forceful_removal = TRUE)
 		return
 	if(get_dist(knotted_owner, knotted_recipient) > 2)
