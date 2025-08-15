@@ -310,7 +310,6 @@
 
 /atom/movable/screen/alert/status_effect/knot_tied
 	name = "Knotted"
-	desc = "I feel their knot throb inside of me, I find it hard to walk."
 
 /datum/status_effect/knot_tied/on_apply()
 	. = ..()
@@ -325,7 +324,6 @@
 
 /atom/movable/screen/alert/status_effect/knotted
 	name = "Knotted"
-	desc = "I feel my knot throb with warmth, they're stuck to me."
 
 /datum/sex_controller/proc/ejaculate()
 	log_combat(user, user, "Ejaculated")
