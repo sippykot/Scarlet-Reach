@@ -30,9 +30,9 @@
 	var/last_moan = 0
 	var/last_pain = 0
 	var/aphrodisiac = 1 //1 by default, acts as a multiplier on arousal gain. If this is different than 1, set/freeze arousal is disabled.
-	var/knotted_currently = 0 //quick flag to ensure either party is able to be knotted, as we do not handle the edgecase for multiple knots
-	var/mob/living/carbon/human/knotted_owner = null //whom has the knot
-	var/mob/living/carbon/human/knotted_recipient = null //whom took the knot
+	var/knotted_currently = 0 // quick flag to ensure either party is able to be knotted, as we do not handle the edgecase for multiple knots
+	var/mob/living/carbon/human/knotted_owner = null // whom has the knot
+	var/mob/living/carbon/human/knotted_recipient = null // whom took the knot
 	/// Which zones we are using in the current action.
 	var/using_zones = list()
 
@@ -210,8 +210,8 @@
 	if(knotted_owner.sexcon.considered_limp())
 		knot_remove()
 		return
-	var/is_werewolf = istype(knotted_owner, /mob/living/carbon/human/species/werewolf) //allow werewolves to use their superior lupian power to drag around their prey, simply for the lols
-	if(!is_werewolf && knotted_owner.m_intent == MOVE_INTENT_RUN && (knotted_owner.mobility_flags & MOBILITY_STAND)) // pop
+	var/lupineisop = knotted_owner.STASTR > (knotted_recipient.STACON + 3) // if the stat difference is too great, don't attempt to disconnect on run
+	if(!lupineisop && knotted_owner.m_intent == MOVE_INTENT_RUN && (knotted_owner.mobility_flags & MOBILITY_STAND)) // pop it
 		knot_remove(forceful_removal = TRUE)
 		return
 	var/dist = get_dist(knotted_owner, knotted_recipient)
