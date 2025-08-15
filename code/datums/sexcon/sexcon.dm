@@ -152,8 +152,8 @@
 		playsound(target, pick(list('sound/misc/mat/mouthend (1).ogg','sound/misc/mat/mouthend (2).ogg')), 100, FALSE, ignore_walls = FALSE)
 	else
 		playsound(target, 'sound/misc/mat/endin.ogg', 50, TRUE, ignore_walls = FALSE)
-		if(user != target)
-			knot_try()
+	if(user != target)
+		knot_try()
 	after_ejaculation()
 	if(!oral)
 		after_intimate_climax()
@@ -177,6 +177,11 @@
 	if(user.sexcon.considered_limp())
 		return
 	if(!user.sexcon.knot_penis_type()) // don't have that dog in 'em
+		return
+	if(!user.sexcon.current_action)
+		return
+	var/datum/sex_action/action = SEX_ACTION(user.sexcon.current_action)
+	if(!action.knot_on_finish) // the current action does not support knot climaxing, abort
 		return
 	target.apply_status_effect(/datum/status_effect/knot_tied)
 	user.apply_status_effect(/datum/status_effect/knotted)
@@ -295,7 +300,7 @@
 
 /atom/movable/screen/alert/status_effect/knot_tied
 	name = "Knotted"
-	desc = "I feel their knot throb inside of me, I can't move from them."
+	desc = "I feel their knot throb inside of me, I find it hard to walk."
 
 /datum/status_effect/knotted
 	id = "knotted"
