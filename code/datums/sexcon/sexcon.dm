@@ -301,24 +301,24 @@
 		knotted_recipient = null
 
 /datum/status_effect/knot_tied
-	id = "knotted"
+	id = "knot_tied"
+	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/knot_tied
 	effectedstats = list("strength" = -5, "constitution" = -3, "endurance" = -2, "speed" = -5)
-
-/datum/status_effect/knot_tied/on_apply()
-	. = ..()
-	if(!owner.stat)
-		to_chat(owner, span_userdanger("You have been knotted!"))
-
-/datum/status_effect/knot_tied/on_remove()
-	. = ..()
 
 /atom/movable/screen/alert/status_effect/knot_tied
 	name = "Knotted"
 	desc = "I feel their knot throb inside of me, I find it hard to walk."
 
+/datum/status_effect/knot_tied/on_apply()
+	. = ..()
+	if(!owner.stat)
+		to_chat(owner, span_userdanger("You have been knotted!"))
+	return ..()
+
 /datum/status_effect/knotted
 	id = "knotted"
+	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/knotted
 
 /atom/movable/screen/alert/status_effect/knotted
