@@ -226,10 +226,11 @@
 
 /datum/sex_controller/proc/knot_remove(forceful_removal = FALSE, notify = TRUE)
 	if(!QDELETED(knotted_recipient) && !QDELETED(knotted_owner))
+		if(notify)
+			playsound(knotted_recipient, 'sound/misc/mat/pop.ogg', 100, TRUE, -2, ignore_walls = FALSE)
 		if(forceful_removal)
 			knotted_recipient.apply_damage(50, BRUTE, BODY_ZONE_CHEST)
 			knotted_recipient.Stun(80)
-			playsound(knotted_recipient, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2, ignore_walls = FALSE)
 			playsound(knotted_owner, 'sound/misc/mat/segso.ogg', 50, TRUE, -2, ignore_walls = FALSE)
 			knotted_recipient.emote("paincrit", TRUE)
 			if(notify)
