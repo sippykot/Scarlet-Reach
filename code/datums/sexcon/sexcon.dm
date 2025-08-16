@@ -190,7 +190,7 @@
 		return
 	if(user.sexcon.considered_limp())
 		to_chat(user, span_notice("My knot was too soft to tie."))
-		to_chat(target, span_notice("You feel their deflated knot slip out."))
+		to_chat(target, span_notice("I feel their deflated knot slip out."))
 		return
 	log_combat(user, target, "Started knot tugging")
 	if(target.sexcon.knotted_currently) // only one knot at a time, you slut
