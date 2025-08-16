@@ -176,8 +176,6 @@
 /datum/sex_controller/proc/knot_try()
 	if(!user.sexcon.can_use_penis())
 		return
-	if(user.sexcon.considered_limp())
-		return
 	if(!user.sexcon.knot_penis_type()) // don't have that dog in 'em
 		return
 	if(!user.sexcon.current_action)
@@ -186,6 +184,10 @@
 		return
 	var/datum/sex_action/action = SEX_ACTION(user.sexcon.current_action)
 	if(!action.knot_on_finish) // the current action does not support knot climaxing, abort
+		return
+	if(user.sexcon.considered_limp())
+		to_chat(user, span_notice("My knot was too soft to tie."))
+		to_chat(target, span_notice("You feel their deflated knot slip out."))
 		return
 	if(target.sexcon.knotted_currently) // only one knot at a time, you slut
 		target.sexcon.knot_remove()
