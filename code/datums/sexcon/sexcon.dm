@@ -30,7 +30,7 @@
 	var/last_moan = 0
 	var/last_pain = 0
 	var/aphrodisiac = 1 //1 by default, acts as a multiplier on arousal gain. If this is different than 1, set/freeze arousal is disabled.
-	var/knotted_currently = 0 // quick flag to ensure either party is able to be knotted, as we do not handle the edgecase for multiple knots
+	var/knotted_currently = FALSE // quick flag to ensure either party is able to be knotted, as we do not handle the edgecase for multiple knots
 	var/datum/weakref/knotted_owner = null // whom has the knot
 	var/datum/weakref/knotted_recipient = null // whom took the knot
 	/// Which zones we are using in the current action.
@@ -38,6 +38,9 @@
 
 /datum/sex_controller/New(mob/living/carbon/human/owner)
 	user = owner
+	knotted_owner = null
+	knotted_recipient = null
+	knotted_currently = FALSE
 
 /datum/sex_controller/Destroy()
 	//remove_from_target_receiving()
@@ -327,18 +330,23 @@
 			btm.emote("painmoan", forced = TRUE)
 			btm.sexcon.try_do_pain_effect(PAIN_MILD_EFFECT, FALSE)
 		add_cum_floor(get_turf(btm))
-	top?.remove_status_effect(/datum/status_effect/knotted)
-	btm?.remove_status_effect(/datum/status_effect/knot_tied)
-	top?.sexcon.knotted_currently = FALSE
-	btm?.sexcon.knotted_currently = FALSE
 	if(top)
-		log_combat(top, top, "Stopped knot tugging")
+		top.remove_status_effect(/datum/status_effect/knotted)
 		UnregisterSignal(top, COMSIG_MOVABLE_MOVED)
-		knotted_owner = null
+		top.sexcon.knotted_owner = null
+		top.sexcon.knotted_recipient = null
+		top.sexcon.knotted_currently = FALSE
+		log_combat(top, top, "Stopped knot tugging")
 	if(btm)
-		log_combat(btm, btm, "Stopped knot tugging")
+		btm.remove_status_effect(/datum/status_effect/knot_tied)
 		UnregisterSignal(btm, COMSIG_MOVABLE_MOVED)
-		knotted_recipient = null
+		btm.sexcon.knotted_owner = null
+		btm.sexcon.knotted_recipient = null
+		btm.sexcon.knotted_currently = FALSE
+		log_combat(btm, btm, "Stopped knot tugging")
+	knotted_currently = FALSE
+	knotted_owner = null
+	knotted_recipient = null
 
 /mob/living/carbon/human/werewolf_transform() // needed to ensure that we safely remove the tie before transitioning
 	if(src.sexcon.knotted_currently)
