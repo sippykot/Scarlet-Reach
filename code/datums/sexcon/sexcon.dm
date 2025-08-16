@@ -189,6 +189,7 @@
 		to_chat(user, span_notice("My knot was too soft to tie."))
 		to_chat(target, span_notice("You feel their deflated knot slip out."))
 		return
+	log_combat(user, target, "Started knot tugging")
 	if(target.sexcon.knotted_currently) // only one knot at a time, you slut
 		target.sexcon.knot_remove()
 	if(user.sexcon.knotted_currently)
@@ -331,9 +332,11 @@
 	top?.sexcon.knotted_currently = FALSE
 	btm?.sexcon.knotted_currently = FALSE
 	if(top)
+		log_combat(top, top, "Stopped knot tugging")
 		UnregisterSignal(top, COMSIG_MOVABLE_MOVED)
 		knotted_owner = null
 	if(btm)
+		log_combat(btm, btm, "Stopped knot tugging")
 		UnregisterSignal(btm, COMSIG_MOVABLE_MOVED)
 		knotted_recipient = null
 
