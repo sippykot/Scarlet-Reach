@@ -437,6 +437,7 @@
 
 /atom/movable/screen/alert/status_effect/knot_gaped
 	name = "Gaped"
+	desc = "You were forcefully withdrawn from. Warmth runs freely down your thighs..."
 
 /datum/status_effect/knotted
 	id = "knotted"
