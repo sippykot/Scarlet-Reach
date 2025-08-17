@@ -1,9 +1,25 @@
 {
+	"multiword": {
+		"long live": "viva",
+		"the duchess": "la duchessa",
+		"the duke": "il duca",
+		"the king": "il re",
+		"the queen": "la regina",
+		"the prince": "il principe",
+		"the princess": "la principessa",
+		"the duchy": "il ducato",
+		"the ten": "la decina",
+		"the four": "il quarto",
+		"the one": "l'uno"
+
+	},
     "full": {
         "wine": "vino",
 		"fuck": "fanculo",
 		"shit": "merda",
 		"hello": "ciao",
+		"of": "di",
+		"and": "e",
 		"bye": "addio",
 		"goodbye": "arrivederci",
 		"the": "il",
@@ -43,15 +59,22 @@
 		"duchess": "duchessa",
 		"scarlet": "scarlatto",
 		"reach": "raggiungere",
-		"penis": "pene"
+		"penis": "pene",
+		"one": "uno",
+		"two": "due",
+		"three": "tre",
+		"four": "quattro",
+		"five": "cinque",
+		"six": "sei",
+		"seven": "sette",
+		"eight": "otto",
+		"nine": "nove",
+		"ten": "dieci"
     },
     "start": {
     },
     "end": {
     },
-	"multiword": {
-		"long live": "viva"
-	},
     "syllable": {
     }
 }
