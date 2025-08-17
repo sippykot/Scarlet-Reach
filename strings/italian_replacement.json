@@ -39,10 +39,6 @@
 		"defeat": "sconfitta",
 		"duke": "duca",
 		"duchess": "duchessa",
-		"long live": "viva",
-		"long live the duke": "viva il duca",
-		"long live the duchess": "viva la duchessa",
-		"long live the duchy": "viva il ducato",
 		"scarlet": "scarlatto",
 		"reach": "raggiungere",
 		"penis": "pene"
@@ -52,7 +48,10 @@
     "end": {
     },
 	"multiword": {
-
+		"long live": "viva",
+		"long live the duke": "viva il duca",
+		"long live the duchess": "viva la duchessa",
+		"long live the duchy": "viva il ducato"
 	},
     "syllable": {
     }
