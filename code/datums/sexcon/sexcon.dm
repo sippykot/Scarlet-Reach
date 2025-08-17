@@ -192,13 +192,15 @@
 		to_chat(user, span_notice("My knot was too soft to tie."))
 		to_chat(target, span_notice("I feel their deflated knot slip out."))
 		return
-	log_combat(user, target, "Started knot tugging")
 	if(target.sexcon.knotted_currently) // only one knot at a time, you slut
-		target.sexcon.knot_remove()
+		target.sexcon.knot_remove(keep_btm_status = TRUE) // don't bother removing status if we're reapplying knot status only a few lines down (fixes stacking stats glitch)
 	if(user.sexcon.knotted_currently)
-		user.sexcon.knot_remove()
-	target.apply_status_effect(/datum/status_effect/knot_tied)
-	user.apply_status_effect(/datum/status_effect/knotted)
+		user.sexcon.knot_remove(keep_top_status = TRUE)
+	log_combat(user, target, "Started knot tugging")
+	if(!target.has_status_effect(/datum/status_effect/knot_tied)) // if bottom has the effect still applied from last knotting, don't bother reapplying it
+		target.apply_status_effect(/datum/status_effect/knot_tied)
+	if(!user.has_status_effect(/datum/status_effect/knotted)) // if top already has the effect applied from last knotting, don't bother reapplying it
+		user.apply_status_effect(/datum/status_effect/knotted)
 	if(force > SEX_FORCE_MID) // if using force above default
 		if(force == SEX_FORCE_EXTREME) // damage if set to max force
 			target.apply_damage(30, BRUTE, BODY_ZONE_CHEST)
@@ -206,13 +208,15 @@
 		else
 			target.sexcon.try_do_pain_effect(PAIN_MILD_EFFECT, FALSE)
 		target.Stun(80) // stun for dramatic effect
+	user.visible_message(span_notice("[user] ties their knot inside of [target]!"), span_notice("I tie my knot inside of [target]."))
+	if(target.stat != DEAD)
+		to_chat(target, span_userdanger("You have been knotted!"))
 	user.sexcon.knotted_owner = WEAKREF(user)
 	user.sexcon.knotted_recipient = WEAKREF(target)
 	target.sexcon.knotted_owner = WEAKREF(user)
 	target.sexcon.knotted_recipient = WEAKREF(target)
 	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(knot_move))
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(knot_tugged))
-	user.visible_message(span_notice("[user] ties their knot inside of [target]!"), span_notice("I tie my knot inside of [target]."))
 	user.sexcon.knotted_currently = target.sexcon.knotted_currently = TRUE
 
 /datum/sex_controller/proc/knot_move()
@@ -307,7 +311,7 @@
 		return
 	btm.face_atom(top)
 
-/datum/sex_controller/proc/knot_remove(forceful_removal = FALSE, notify = TRUE)
+/datum/sex_controller/proc/knot_remove(forceful_removal = FALSE, notify = TRUE, keep_top_status = FALSE, keep_btm_status = FALSE)
 	var/mob/living/carbon/human/top = knotted_owner?.resolve()
 	var/mob/living/carbon/human/btm = knotted_recipient?.resolve()
 	if(btm && ishuman(btm) && !QDELETED(btm) && top && ishuman(top) && !QDELETED(top))
@@ -331,18 +335,20 @@
 			btm.sexcon.try_do_pain_effect(PAIN_MILD_EFFECT, FALSE)
 		add_cum_floor(get_turf(btm))
 	if(top)
-		top.remove_status_effect(/datum/status_effect/knotted)
+		if(!keep_top_status)
+			top.remove_status_effect(/datum/status_effect/knotted)
 		UnregisterSignal(top, COMSIG_MOVABLE_MOVED)
+		top.sexcon.knotted_currently = FALSE
 		top.sexcon.knotted_owner = null
 		top.sexcon.knotted_recipient = null
-		top.sexcon.knotted_currently = FALSE
 		log_combat(top, top, "Stopped knot tugging")
 	if(btm)
-		btm.remove_status_effect(/datum/status_effect/knot_tied)
+		if(!keep_btm_status)
+			btm.remove_status_effect(/datum/status_effect/knot_tied)
 		UnregisterSignal(btm, COMSIG_MOVABLE_MOVED)
+		btm.sexcon.knotted_currently = FALSE
 		btm.sexcon.knotted_owner = null
 		btm.sexcon.knotted_recipient = null
-		btm.sexcon.knotted_currently = FALSE
 		log_combat(btm, btm, "Stopped knot tugging")
 	knotted_currently = FALSE
 	knotted_owner = null
@@ -366,12 +372,6 @@
 
 /atom/movable/screen/alert/status_effect/knot_tied
 	name = "Knotted"
-
-/datum/status_effect/knot_tied/on_apply()
-	. = ..()
-	if(!owner.stat)
-		to_chat(owner, span_userdanger("You have been knotted!"))
-	return ..()
 
 /datum/status_effect/knotted
 	id = "knotted"
