@@ -193,13 +193,13 @@
 		to_chat(target, span_notice("I feel their deflated knot slip out."))
 		return
 	if(target.sexcon.knotted_currently) // only one knot at a time, you slut
-		target.sexcon.knot_remove(keep_btm_status = TRUE) // don't bother removing status if we're reapplying knot status only a few lines down (fixes stacking stats glitch)
+		target.sexcon.knot_remove(keep_btm_status = TRUE) // keep the status effect if we're still going to be knotted (this fixes a weird perma stat debuff if we try to remove/apply the same effect in the same tick)
 	if(user.sexcon.knotted_currently)
-		user.sexcon.knot_remove(keep_top_status = TRUE)
+		user.sexcon.knot_remove(keep_top_status = TRUE) // keep the status effect if we're still going to be knotted (this fixes a weird perma stat debuff if we try to remove/apply the same effect in the same tick)
 	log_combat(user, target, "Started knot tugging")
-	if(!target.has_status_effect(/datum/status_effect/knot_tied)) // if bottom has the effect still applied from last knotting, don't bother reapplying it
+	if(!target.has_status_effect(/datum/status_effect/knot_tied)) // only apply status if we don't have it already
 		target.apply_status_effect(/datum/status_effect/knot_tied)
-	if(!user.has_status_effect(/datum/status_effect/knotted)) // if top already has the effect applied from last knotting, don't bother reapplying it
+	if(!user.has_status_effect(/datum/status_effect/knotted)) // only apply status if we don't have it already
 		user.apply_status_effect(/datum/status_effect/knotted)
 	if(force > SEX_FORCE_MID) // if using force above default
 		if(force == SEX_FORCE_EXTREME) // damage if set to max force
