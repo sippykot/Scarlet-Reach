@@ -48,10 +48,10 @@
     "end": {
     },
 	"multiword": {
-		"long live": "viva",
 		"long live the duke": "viva il duca",
 		"long live the duchess": "viva la duchessa",
-		"long live the duchy": "viva il ducato"
+		"long live the duchy": "viva il ducato",
+		"long live": "viva"
 	},
     "syllable": {
     }
