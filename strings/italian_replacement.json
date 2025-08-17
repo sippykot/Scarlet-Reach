@@ -6,6 +6,8 @@
 		"hello": "ciao",
 		"bye": "addio",
 		"goodbye": "arrivederci",
+		"the": "il",
+		"immortal": "immortale",
 		"yes": "si",
 		"frog": "rana",
 		"magnicient": "magnifico",
@@ -48,9 +50,6 @@
     "end": {
     },
 	"multiword": {
-		"long live the duke": "viva il duca",
-		"long live the duchess": "viva la duchessa",
-		"long live the duchy": "viva il ducato",
 		"long live": "viva"
 	},
     "syllable": {
