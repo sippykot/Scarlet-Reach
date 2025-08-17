@@ -238,8 +238,10 @@
 
 /datum/sex_controller/proc/knot_movement(atom/movable/mover, atom/oldloc, direction)
 	SIGNAL_HANDLER
-	if(QDELETED(mover) || !ishuman(mover)) // this should never hit, but if it does remove callback
-		UnregisterSignal(src, COMSIG_MOVABLE_MOVED)
+	if(QDELETED(mover))
+		return
+	if(!ishuman(mover)) // this should never hit, but if it does remove callback
+		UnregisterSignal(mover, COMSIG_MOVABLE_MOVED)
 		return
 	var/mob/living/carbon/human/user = mover
 	switch(user.sexcon.knotted_status)
@@ -250,7 +252,7 @@
 				return
 			knot_movement_btm()
 		if(KNOTTED_NULL) // this should never hit, but if it does remove callback
-			UnregisterSignal(mover, COMSIG_MOVABLE_MOVED)
+			UnregisterSignal(user.sexcon.user, COMSIG_MOVABLE_MOVED)
 
 /datum/sex_controller/proc/knot_movement_top()
 	var/mob/living/carbon/human/top = knotted_owner
