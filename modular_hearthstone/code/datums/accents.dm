@@ -17,7 +17,8 @@ GLOBAL_LIST_INIT(character_accents, list("No accent",
 	"Valley accent",
 	"Kazengun accent",
 	"Avar accent",
-	"Pirate accent"))
+	"Pirate accent",
+	"Etruscan accent"))
 
 // Global mapping of accent names to their font span lists
 GLOBAL_LIST_INIT(accent_spans, list(
