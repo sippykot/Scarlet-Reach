@@ -356,11 +356,11 @@
 	if(btm.IsStun())
 		addtimer(CALLBACK(src, PROC_REF(knot_movement_btm_after)), 0.1 SECONDS)
 		return
-	if(prob(5))
+	if(prob(10))
 		btm.emote("groan")
 		btm.sexcon.try_do_pain_effect(PAIN_MED_EFFECT, FALSE)
 		btm.Stun(15)
-	else if(prob(2))
+	else if(prob(4))
 		btm.emote("painmoan")
 	addtimer(CALLBACK(src, PROC_REF(knot_movement_btm_after)), 0.1 SECONDS)
 
