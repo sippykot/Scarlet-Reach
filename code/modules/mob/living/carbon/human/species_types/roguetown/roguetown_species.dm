@@ -11,7 +11,7 @@
 			return strings("french_replacement.json", type, convert_HTML = TRUE)
 		if("Grenzelhoft accent")
 			return strings("german_replacement.json", type, convert_HTML = TRUE)
-		if("Etruscan accent")
+		if("North Etruscan accent")
 			return strings("italian_replacement.json", type, convert_HTML = TRUE)
 		if("Hammerhold accent")
 			return strings("Anglish.json", type, convert_HTML = TRUE)
