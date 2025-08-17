@@ -208,6 +208,8 @@
 		var/repeated_customer = target.sexcon.knotted_owner == user ? TRUE : FALSE // we're knotting the same character we were already knotted to, don't remove the status effects (this fixes a weird perma stat debuff if we try to remove/apply the same effect in the same tick)
 		var/target_is_a_bottom = target.sexcon.knotted_status == KNOTTED_AS_BTM // keep the same status effect in place, they're still getting topped
 		target.sexcon.knot_remove(keep_btm_status = target_is_a_bottom, keep_top_status = repeated_customer)
+		if(target_is_a_bottom && target.compliance && !target.has_status_effect(/datum/status_effect/knot_fucked_stupid)) // if the target is getting double teamed and they have compliance mode, give them the fucked stupid status
+			target.apply_status_effect(/datum/status_effect/knot_fucked_stupid)
 	if(user.sexcon.knotted_status)
 		var/top_still_topping = user.sexcon.knotted_status == KNOTTED_AS_TOP // top just reknotted a different character, don't retrigger the same status (this fixes a weird perma stat debuff if we try to remove/apply the same effect in the same tick)
 		user.sexcon.knot_remove(keep_top_status = top_still_topping)
@@ -436,6 +438,17 @@
 
 /atom/movable/screen/alert/status_effect/knot_tied
 	name = "Knotted"
+
+/datum/status_effect/knot_fucked_stupid
+	id = "knot_fucked_stupid"
+	duration = 120 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
+	alert_type = /atom/movable/screen/alert/status_effect/knot_fucked_stupid
+	effectedstats = list("intelligence" = -10)
+
+/atom/movable/screen/alert/status_effect/knot_fucked_stupid
+	name = "Fucked Stupid"
+	desc = "Mmmph I can't think straight..."
 
 /datum/status_effect/knot_gaped
 	id = "knot_gaped"
