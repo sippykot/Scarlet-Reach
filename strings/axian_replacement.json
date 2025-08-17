@@ -94,15 +94,16 @@
 
 	},
 
-	"start": {
+    "start": {
+
+    },
+    "end": {
+
+    },
+	"multiword": {
 
 	},
+    "syllable": {
 
-	"end": {
-
-	},
-	
-	"syllable": {
-
-	}
+    }
 }
