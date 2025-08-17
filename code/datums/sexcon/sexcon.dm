@@ -281,7 +281,7 @@
 		knot_remove(forceful_removal = TRUE)
 		return
 	var/dist = get_dist(top, btm)
-	if(dist > 1) // attempt to move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
+	if(dist > 1 &&  dist < 6) // attempt to move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
 		btm.sexcon.tugging_knot = TRUE
 		for(var/i in 1 to 3) // try moving three times
 			step_towards(btm, top)
@@ -290,6 +290,18 @@
 				break
 		btm.sexcon.tugging_knot = FALSE
 	if(dist > 1) // if we couldn't move them closer, force the knot out
+		if(dist > 10) // teleported or something else - mods, rip their cock off thank you
+			var/obj/item/organ/penis/penor = top.getorganslot(ORGAN_SLOT_PENIS)
+			if(penor)
+				penor.Remove(top)
+				penor.forceMove(top.drop_location())
+				penor.add_mob_blood(top)
+				playsound(get_turf(top), 'sound/combat/dismemberment/dismem (5).ogg', 80, TRUE)
+				to_chat(top, span_userdanger("You feel a sharp pain as your knot is torn asunder!"))
+				to_chat(btm, span_userdanger("You feel their knot withdraw faster than you can process!"))
+				top.emote("paincrit", forced = TRUE)
+				knot_remove(forceful_removal = TRUE, notify = FALSE)
+				return
 		knot_remove(forceful_removal = TRUE)
 		return
 	addtimer(CALLBACK(src, PROC_REF(knot_movement_top_after)), 0.1 SECONDS)
@@ -320,6 +332,18 @@
 		knot_remove()
 		return
 	if(get_dist(top, btm) > 2)
+		if(get_dist(top, btm) > 10) // teleported or something else - mods, rip their cock off thank you
+			var/obj/item/organ/penis/penor = top.getorganslot(ORGAN_SLOT_PENIS)
+			if(penor)
+				penor.Remove(top)
+				penor.forceMove(top.drop_location())
+				penor.add_mob_blood(top)
+				playsound(get_turf(top), 'sound/combat/dismemberment/dismem (5).ogg', 80, TRUE)
+				to_chat(top, span_userdanger("You feel a sharp pain as your knot is torn asunder!"))
+				to_chat(btm, span_userdanger("You feel their knot withdraw faster than you can process!"))
+				top.emote("paincrit", forced = TRUE)
+				knot_remove(forceful_removal = TRUE, notify = FALSE)
+				return
 		knot_remove(forceful_removal = TRUE)
 		return
 	for(var/i in 2 to get_dist(top, btm)) // Move the knot recipient to a minimum of 1 tiles away from the knot owner, so they trail behind
