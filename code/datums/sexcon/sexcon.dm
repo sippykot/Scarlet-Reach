@@ -231,6 +231,7 @@
 		target.apply_status_effect(/datum/status_effect/knot_tied)
 	if(!user.has_status_effect(/datum/status_effect/knotted)) // only apply status if we don't have it already
 		user.apply_status_effect(/datum/status_effect/knotted)
+	target.remove_status_effect(/datum/status_effect/knot_gaped)
 	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(knot_movement))
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(knot_movement))
 
@@ -354,6 +355,8 @@
 			if (top.sexcon.arousal > MAX_AROUSAL / 2) // still hard, let it rip like a beyblade
 				damage += 30
 				btm.Knockdown(10)
+				if(notify && !keep_btm_status && !btm.has_status_effect(/datum/status_effect/knot_gaped)) // apply gaped status if extra forceful pull (only if we're not reknotting target)
+					btm.apply_status_effect(/datum/status_effect/knot_gaped)
 			btm.apply_damage(damage, BRUTE, BODY_ZONE_CHEST)
 			btm.Stun(80)
 			playsound(btm, 'sound/misc/mat/pop.ogg', 100, TRUE, -2, ignore_walls = FALSE)
@@ -408,6 +411,29 @@
 
 /atom/movable/screen/alert/status_effect/knot_tied
 	name = "Knotted"
+
+/datum/status_effect/knot_gaped
+	id = "knot_gaped"
+	duration = 60 SECONDS
+	tick_interval = 100 // every 10 seconds
+	status_type = STATUS_EFFECT_UNIQUE
+	alert_type = /atom/movable/screen/alert/status_effect/knot_gaped
+	effectedstats = list("strength" = -1, "speed" = -2, "intelligence" = -1)
+	var/last_loc
+
+/datum/status_effect/knot_gaped/on_apply()
+	last_loc = get_turf(owner)
+	return ..()
+
+/datum/status_effect/knot_gaped/tick()
+	var/cur_loc = get_turf(owner)
+	if(get_dist(cur_loc, last_loc) > 5) // too close, don't spawn puddle
+		add_cum_floor(get_turf(owner))
+		playsound(owner, pick('sound/misc/bleed (1).ogg', 'sound/misc/bleed (2).ogg', 'sound/misc/bleed (3).ogg'), 50, TRUE, -2, ignore_walls = FALSE)
+	last_loc = cur_loc
+
+/atom/movable/screen/alert/status_effect/knot_gaped
+	name = "Gaped"
 
 /datum/status_effect/knotted
 	id = "knotted"
