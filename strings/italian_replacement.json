@@ -1,18 +1,11 @@
 {
     "full": {
-        "make": "makea",
-        "mom": "mamma",
-        "my": "mia",
-        "spicy": "a'spicy",
-        "thanks": "grazie",
-        "use": "usea",
-        "whose": "whosea",
-        "why": "fora what reason",
         "wine": "vino",
 		"fuck": "fanculo",
 		"shit": "merda",
 		"hello": "ciao",
-		"bye": "arrivederci",
+		"bye": "addio",
+		"goodbye": "arrivederci",
 		"yes": "si",
 		"frog": "rana",
 		"magnicient": "magnifico",
@@ -55,18 +48,12 @@
 		"penis": "pene"
     },
     "start": {
-
     },
     "end": {
-        "d": "dda",
-        "g": "gga",
-        "m": "mma",
-        "s": "ssa"
     },
 	"multiword": {
 
 	},
     "syllable": {
-        "r": "rr"
     }
 }
