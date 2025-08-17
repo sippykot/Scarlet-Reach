@@ -233,8 +233,8 @@
 	if(!user.has_status_effect(/datum/status_effect/knotted)) // only apply status if we don't have it already
 		user.apply_status_effect(/datum/status_effect/knotted)
 	target.remove_status_effect(/datum/status_effect/knot_gaped)
-	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(knot_movement))
-	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(knot_movement))
+	RegisterSignal(user.sexcon.knotted_owner, COMSIG_MOVABLE_MOVED, PROC_REF(knot_movement))
+	RegisterSignal(user.sexcon.knotted_recipient, COMSIG_MOVABLE_MOVED, PROC_REF(knot_movement))
 
 /datum/sex_controller/proc/knot_movement(atom/movable/mover, atom/oldloc, direction)
 	SIGNAL_HANDLER
@@ -250,7 +250,7 @@
 				return
 			knot_movement_btm()
 		if(KNOTTED_NULL) // this should never hit, but if it does remove callback
-			UnregisterSignal(src.user, COMSIG_MOVABLE_MOVED)
+			UnregisterSignal(mover, COMSIG_MOVABLE_MOVED)
 
 /datum/sex_controller/proc/knot_movement_top()
 	var/mob/living/carbon/human/top = knotted_owner
