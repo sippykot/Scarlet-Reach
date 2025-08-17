@@ -32,6 +32,11 @@
 		"shit": "merda",
 		"hello": "ciao",
 		"of": "di",
+		"forward": "avanti",
+		"go": "andare",
+		"move": "muovere",
+		"horse": "cavallo",
+		"antelope": "antilope",
 		"and": "e",
 		"bye": "addio",
 		"goodbye": "arrivederci",
@@ -82,7 +87,10 @@
 		"seven": "sette",
 		"eight": "otto",
 		"nine": "nove",
-		"ten": "dieci"
+		"ten": "dieci",
+		"crossbow": "balestra",
+		"perfect": "perfetto",
+		"great": "grande"
     },
     "start": {
     },
