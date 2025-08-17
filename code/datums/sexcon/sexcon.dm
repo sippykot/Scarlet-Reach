@@ -206,10 +206,11 @@
 		return
 	if(target.sexcon.knotted_status) // only one knot at a time, you slut
 		var/repeated_customer = target.sexcon.knotted_owner == user ? TRUE : FALSE // we're knotting the same character we were already knotted to, don't remove the status effects (this fixes a weird perma stat debuff if we try to remove/apply the same effect in the same tick)
-		target.sexcon.knot_remove(keep_btm_status = TRUE, keep_top_status = repeated_customer)
+		var/target_is_a_bottom = target.sexcon.knotted_status == KNOTTED_AS_BTM // keep the same status effect in place, they're still getting topped
+		target.sexcon.knot_remove(keep_btm_status = target_is_a_bottom, keep_top_status = repeated_customer)
 	if(user.sexcon.knotted_status)
-		var/top_still_active = target.sexcon.knotted_owner == user ? TRUE : FALSE // top just reknotted a different character, don't retrigger the same status (this fixes a weird perma stat debuff if we try to remove/apply the same effect in the same tick)
-		user.sexcon.knot_remove(keep_top_status = top_still_active)
+		var/top_still_topping = user.sexcon.knotted_status == KNOTTED_AS_TOP // top just reknotted a different character, don't retrigger the same status (this fixes a weird perma stat debuff if we try to remove/apply the same effect in the same tick)
+		user.sexcon.knot_remove(keep_top_status = top_still_topping)
 	user.sexcon.knotted_owner = user
 	user.sexcon.knotted_recipient = target
 	user.sexcon.knotted_status = KNOTTED_AS_TOP
@@ -349,7 +350,7 @@
 /datum/sex_controller/proc/knot_remove(forceful_removal = FALSE, notify = TRUE, keep_top_status = FALSE, keep_btm_status = FALSE)
 	var/mob/living/carbon/human/top = knotted_owner
 	var/mob/living/carbon/human/btm = knotted_recipient
-	if(btm && ishuman(btm) && !QDELETED(btm) && top && ishuman(top) && QDELETED(top))
+	if(btm && ishuman(btm) && !QDELETED(btm) && top && ishuman(top) && !QDELETED(top))
 		if(forceful_removal)
 			var/damage = 40
 			if (top.sexcon.arousal > MAX_AROUSAL / 2) // still hard, let it rip like a beyblade
