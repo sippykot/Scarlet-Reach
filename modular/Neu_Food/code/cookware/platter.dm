@@ -123,7 +123,7 @@ What it does:
 	name = "silver platter"
 	desc = "A fancy silver plate often used by the nobility as a symbol of class."
 	icon_state = "platter_silver"
-	sellprice = 60
+	sellprice = 48
 
 /obj/item/cooking/platter/gold
 	name = "gold platter"
@@ -131,4 +131,4 @@ What it does:
 	icon_state = "platter_gold"
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	sellprice = 75
+	sellprice = 60

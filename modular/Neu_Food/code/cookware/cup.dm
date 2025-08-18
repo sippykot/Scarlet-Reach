@@ -64,7 +64,7 @@
 	name = "silver goblet"
 	desc = "A silver goblet, its surface carefully polished."
 	icon_state = "silver"
-	sellprice = 60
+	sellprice = 48
 	last_used = 0
 	is_silver = TRUE
 
@@ -72,7 +72,7 @@
 	name = "silver cup"
 	desc = "A silver cup, its surface carefully polished."
 	icon_state = "scup"
-	sellprice = 40
+	sellprice = 32
 
 /obj/item/reagent_containers/glass/cup/silver/pickup(mob/user)
 	. = ..()
@@ -120,13 +120,13 @@
 	name = "golden goblet"
 	desc = "This goblet radiates opulence and grandeur."
 	icon_state = "golden"
-	sellprice = 75
+	sellprice = 60
 
 /obj/item/reagent_containers/glass/cup/golden/small
 	name = "golden cup"
 	desc = "This cup radiates opulence and grandeur."
 	icon_state = "gcup"
-	sellprice = 50
+	sellprice = 40
 
 /obj/item/reagent_containers/glass/cup/golden/poison
 	list_reagents = list(/datum/reagent/toxin/killersice = 1, /datum/reagent/consumable/ethanol/elfred = 20)

@@ -25,9 +25,9 @@
 /obj/item/kitchen/fork/gold
 	name = "gold fork"
 	icon_state = "fork_gold"
-	sellprice = 37
+	sellprice = 30
 
 /obj/item/kitchen/fork/silver
 	name = "silver fork"
 	icon_state = "fork_silver"
-	sellprice = 30
+	sellprice = 24

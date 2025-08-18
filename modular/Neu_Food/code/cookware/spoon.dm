@@ -24,12 +24,12 @@
 /obj/item/kitchen/spoon/gold
 	name = "gold spoon"
 	icon_state = "spoon_gold"
-	sellprice = 37
+	sellprice = 30
 
 /obj/item/kitchen/spoon/silver
 	name = "silver spoon"
 	icon_state = "spoon_silver"
-	sellprice = 30
+	sellprice = 24
 
 // NUKE THIS FUCKING TYPEPATH WHEN WE HAVE TIME
 /obj/item/kitchen/spoon/plastic

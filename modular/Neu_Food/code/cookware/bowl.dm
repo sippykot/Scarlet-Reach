@@ -30,12 +30,12 @@
 /obj/item/reagent_containers/glass/bowl/gold
 	name = "gold bowl"
 	icon_state = "bowl_gold"
-	sellprice = 150
+	sellprice = 120
 
 /obj/item/reagent_containers/glass/bowl/silver
 	name = "silver bowl"
 	icon_state = "bowl_silver"
-	sellprice = 120
+	sellprice = 96
 
 /obj/item/reagent_containers/glass/bowl/tin
 	name = "tin bowl"
