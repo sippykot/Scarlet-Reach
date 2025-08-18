@@ -278,7 +278,7 @@
 	if(!btm || !ishuman(btm) || QDELETED(btm) || !top || !ishuman(top) || QDELETED(top))
 		knot_remove(notify = FALSE)
 		return
-	if(!isnull(top.client) && !top.client.prefs.sexable || !isnull(btm.client) && !btm.client.prefs.sexable) // we respect safewords here, let the players untie themselves
+	if(isnull(top.client) || !top.client?.prefs.sexable || isnull(btm.client) || !btm.client?.prefs.sexable) // we respect safewords here, let the players untie themselves
 		knot_remove()
 		return
 	if(prob(10) && top.m_intent == MOVE_INTENT_WALK && btm in top.buckled_mobs) // if the two characters are being held in a fireman carry, let them muturally get pleasure from it
@@ -341,7 +341,7 @@
 	if(!btm || !ishuman(btm) || QDELETED(btm) || !top || !ishuman(top) || QDELETED(top))
 		knot_remove(notify = FALSE)
 		return
-	if(!isnull(top.client) && !top.client.prefs.sexable || !isnull(btm.client) && !btm.client.prefs.sexable) // we respect safewords here, let the players untie themselves
+	if(isnull(top.client) || !top.client?.prefs.sexable || isnull(btm.client) || !btm.client?.prefs.sexable) // we respect safewords here, let the players untie themselves
 		knot_remove()
 		return
 	if(top.stat >= SOFT_CRIT) // only removed if the knot owner is injured/asleep/dead
