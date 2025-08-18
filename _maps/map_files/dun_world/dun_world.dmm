@@ -3376,7 +3376,7 @@
 	pixel_x = -8;
 	pixel_y = 43
 	},
-/obj/item/reagent_containers/glass/cup/golden{
+/obj/item/reagent_containers/glass/cup/aalloygob{
 	pixel_x = 5;
 	pixel_y = 43
 	},
@@ -15477,6 +15477,7 @@
 /obj/structure/table/wood{
 	icon_state = "largetable"
 	},
+/obj/item/kitchen/fork/tin,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/dwarfin)
 "fbW" = (
@@ -16850,7 +16851,10 @@
 /area/rogue/outdoors/town)
 "fwy" = (
 /obj/structure/table/church/m,
-/obj/item/reagent_containers/glass/bowl/silver,
+/obj/item/cooking/platter/silver{
+	pixel_x = 6;
+	pixel_y = 10
+	},
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/cave/goblinfort)
 "fwD" = (
@@ -30806,9 +30810,8 @@
 /area/rogue/under/cavewet/bogcaves/sunkencity)
 "jUi" = (
 /obj/structure/table/wood,
-/obj/item/reagent_containers/glass/cup/golden{
-	pixel_x = -8;
-	pixel_y = 6
+/obj/item/reagent_containers/glass/cup/golden/small{
+	pixel_y = 8
 	},
 /turf/open/floor/rogue/blocks/platform,
 /area/rogue/outdoors/mountains/decap)
@@ -54074,10 +54077,7 @@
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
 	},
-/obj/item/reagent_containers/glass/cup/silver/small{
-	pixel_x = -6;
-	pixel_y = 5
-	},
+/obj/item/reagent_containers/glass/cup/tin/small,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/town)
 "rtM" = (
@@ -58782,6 +58782,9 @@
 	icon_state = "largetable"
 	},
 /obj/item/cooking/platter/pewter,
+/obj/item/kitchen/fork/tin{
+	pixel_x = -8
+	},
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/dwarfin)
 "sVv" = (
