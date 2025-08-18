@@ -322,6 +322,10 @@
 		return
 	btm.face_atom(top)
 	top.set_pull_offsets(btm, GRAB_AGGRESSIVE)
+	if(!top.IsStun()) // randomly stun our top so they cannot simply drag without any penality
+		if(prob(10))
+			top.sexcon.try_do_pain_effect(PAIN_MILD_EFFECT, FALSE)
+			top.Stun(15)
 	if(btm.IsStun())
 		return
 	if(prob(5))
@@ -493,6 +497,7 @@
 
 /atom/movable/screen/alert/status_effect/knotted
 	name = "Knotted"
+	desc = "I have to be careful where I step..."
 
 /datum/sex_controller/proc/ejaculate()
 	log_combat(user, user, "Ejaculated")
