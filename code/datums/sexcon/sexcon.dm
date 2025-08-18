@@ -322,6 +322,14 @@
 		return
 	btm.face_atom(top)
 	top.set_pull_offsets(btm, GRAB_AGGRESSIVE)
+	if(btm.IsStun())
+		return
+	if(prob(5))
+		btm.emote("groan")
+		btm.sexcon.try_do_pain_effect(PAIN_MED_EFFECT, FALSE)
+		btm.Stun(15)
+	else if(prob(3))
+		btm.emote("painmoan")
 
 /datum/sex_controller/proc/knot_movement_btm()
 	var/mob/living/carbon/human/top = knotted_owner
