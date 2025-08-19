@@ -458,7 +458,7 @@
 
 /datum/status_effect/knot_fucked_stupid
 	id = "knot_fucked_stupid"
-	duration = 120 SECONDS
+	duration = 2 MINUTES
 	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/knot_fucked_stupid
 	effectedstats = list("intelligence" = -10)
