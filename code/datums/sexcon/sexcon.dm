@@ -306,27 +306,19 @@
 				return
 		knot_remove(forceful_removal = TRUE)
 		return
-	addtimer(CALLBACK(src, PROC_REF(knot_movement_top_after)), 0.1 SECONDS)
-
-/datum/sex_controller/proc/knot_movement_top_after()
-	var/mob/living/carbon/human/top = knotted_owner
-	var/mob/living/carbon/human/btm = knotted_recipient
-	if(!ishuman(btm) || QDELETED(btm) || !ishuman(top) || QDELETED(top))
-		return
 	btm.face_atom(top)
 	top.set_pull_offsets(btm, GRAB_AGGRESSIVE)
 	if(!top.IsStun()) // randomly stun our top so they cannot simply drag without any penality
 		if(prob(10))
 			top.sexcon.try_do_pain_effect(PAIN_MILD_EFFECT, FALSE)
 			top.Stun(15)
-	if(btm.IsStun())
-		return
-	if(prob(5))
-		btm.emote("groan")
-		btm.sexcon.try_do_pain_effect(PAIN_MED_EFFECT, FALSE)
-		btm.Stun(15)
-	else if(prob(3))
-		btm.emote("painmoan")
+	if(!btm.IsStun())
+		if(prob(5))
+			btm.emote("groan")
+			btm.sexcon.try_do_pain_effect(PAIN_MED_EFFECT, FALSE)
+			btm.Stun(15)
+		else if(prob(3))
+			btm.emote("painmoan")
 
 /datum/sex_controller/proc/knot_movement_btm()
 	var/mob/living/carbon/human/top = knotted_owner
@@ -360,15 +352,13 @@
 			btm.Stun(30)
 			btm.emote("groan", forced = TRUE)
 			return
-	if(btm.IsStun())
-		addtimer(CALLBACK(src, PROC_REF(knot_movement_btm_after)), 0.1 SECONDS)
-		return
-	if(prob(10))
-		btm.emote("groan")
-		btm.sexcon.try_do_pain_effect(PAIN_MED_EFFECT, FALSE)
-		btm.Stun(15)
-	else if(prob(4))
-		btm.emote("painmoan")
+	if(!btm.IsStun())
+		if(prob(10))
+			btm.emote("groan")
+			btm.sexcon.try_do_pain_effect(PAIN_MED_EFFECT, FALSE)
+			btm.Stun(15)
+		else if(prob(4))
+			btm.emote("painmoan")
 	addtimer(CALLBACK(src, PROC_REF(knot_movement_btm_after)), 0.1 SECONDS)
 
 /datum/sex_controller/proc/knot_movement_btm_after()
