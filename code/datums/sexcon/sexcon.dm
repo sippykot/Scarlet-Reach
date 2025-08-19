@@ -213,7 +213,7 @@
 	if(user.sexcon.knotted_status)
 		var/top_still_topping = user.sexcon.knotted_status == KNOTTED_AS_TOP // top just reknotted a different character, don't retrigger the same status (this fixes a weird perma stat debuff if we try to remove/apply the same effect in the same tick)
 		user.sexcon.knot_remove(keep_top_status = top_still_topping)
-	if(user.patron && istype(user.patron, /datum/patron/inhumen/baotha) && !target.has_status_effect(/datum/status_effect/knot_fucked_stupid)) // as requested, if the top is of the baotha faith, they'll always set the fucked stupid status
+	if((target.compliance || user.patron && istype(user.patron, /datum/patron/inhumen/baotha)) && !target.has_status_effect(/datum/status_effect/knot_fucked_stupid)) // as requested, if the top is of the baotha faith, or the target has compliance mode on
 		target.apply_status_effect(/datum/status_effect/knot_fucked_stupid)
 	user.sexcon.knotted_owner = user
 	user.sexcon.knotted_recipient = target
