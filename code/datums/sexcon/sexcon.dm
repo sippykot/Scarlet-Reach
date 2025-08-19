@@ -274,7 +274,7 @@
 	if(isnull(top.client) || !top.client?.prefs.sexable || isnull(btm.client) || !btm.client?.prefs.sexable) // we respect safewords here, let the players untie themselves
 		knot_remove()
 		return
-	if(prob(10) && top.m_intent == MOVE_INTENT_WALK && btm in top.buckled_mobs) // if the two characters are being held in a fireman carry, let them muturally get pleasure from it
+	if(prob(10) && top.m_intent == MOVE_INTENT_WALK && (btm in top.buckled_mobs)) // if the two characters are being held in a fireman carry, let them muturally get pleasure from it
 		var/obj/item/organ/penis/penis = user.getorganslot(ORGAN_SLOT_PENIS)
 		top.sexcon.perform_sex_action(btm, penis?.penis_size > DEFAULT_PENIS_SIZE ? 6.0 : 3.0, 2, FALSE)
 		btm.sexcon.handle_passive_ejaculation()
