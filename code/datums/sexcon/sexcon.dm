@@ -308,8 +308,8 @@
 		return
 	btm.face_atom(top)
 	top.set_pull_offsets(btm, GRAB_AGGRESSIVE)
-	if(!top.IsStun()) // randomly stun our top so they cannot simply drag without any penality
-		if(prob(10))
+	if(!top.IsStun()) // randomly stun our top so they cannot simply drag without any penality (combat mode doubles the chances)
+		if(prob(top.cmode ? 20 : 10))
 			top.sexcon.try_do_pain_effect(PAIN_MILD_EFFECT, FALSE)
 			top.Stun(15)
 	if(!btm.IsStun())
