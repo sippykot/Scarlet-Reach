@@ -36,6 +36,8 @@
 	var/aphrodisiac = 1 //1 by default, acts as a multiplier on arousal gain. If this is different than 1, set/freeze arousal is disabled.
 	var/knotted_status = KNOTTED_NULL // knotted state and used to prevent multiple knottings when we do not handle that case
 	var/tugging_knot = FALSE
+	var/tugging_knot_check = 0
+	var/tugging_knot_blocked = FALSE
 	var/mob/living/carbon/knotted_owner = null // whom has the knot
 	var/mob/living/carbon/knotted_recipient = null // whom took the knot
 	/// Which zones we are using in the current action.
@@ -287,6 +289,11 @@
 	if(top.sexcon.considered_limp())
 		knot_remove()
 		return
+	if(top.sexcon.tugging_knot_check == 0) // check clothes layer connection every 5 steps and update tugging_knot_blocked
+		top.sexcon.tugging_knot_blocked = !get_location_accessible(top, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE)
+		top.sexcon.tugging_knot_check = 5
+	else
+		top.sexcon.tugging_knot_check--
 	var/lupineisop = top.STASTR > (btm.STACON + 3) // if the stat difference is too great, don't attempt to disconnect on run
 	if(!lupineisop && top.m_intent == MOVE_INTENT_RUN && (top.mobility_flags & MOBILITY_STAND)) // pop it
 		knot_remove(forceful_removal = TRUE)
@@ -309,8 +316,12 @@
 	btm.face_atom(top)
 	top.set_pull_offsets(btm, GRAB_AGGRESSIVE)
 	if(!top.IsStun()) // randomly stun our top so they cannot simply drag without any penality (combat mode doubles the chances)
-		if(prob(top.cmode ? 20 : 10))
+		if(prob(!top.cmode && !top.sexcon.tugging_knot_blocked ? 7 : 20))
 			top.sexcon.try_do_pain_effect(PAIN_MILD_EFFECT, FALSE)
+			if(top.sexcon.tugging_knot_blocked && (top.mobility_flags & MOBILITY_STAND)) // only knock down if standing and knot area is blocked
+				top.Knockdown(10)
+				to_chat(top, span_warning("I trip trying to move while my knot is covered."))
+				top.sexcon.tugging_knot_blocked = 0 // reset blocked state in the case either character stip off again
 			top.Stun(15)
 	if(!btm.IsStun())
 		if(prob(5))
