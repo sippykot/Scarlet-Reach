@@ -463,9 +463,23 @@
 	alert_type = /atom/movable/screen/alert/status_effect/knot_fucked_stupid
 	effectedstats = list("intelligence" = -10)
 
+/datum/status_effect/knot_fucked_stupid/on_apply()
+	if(owner.compliance) // if compliance mode is on, increase the time since they're such a needy twink
+		duration = 10 MINUTES
+	return ..()
+
+/datum/emote/living/scream/can_run_emote(mob/living/user, status_check = TRUE , intentional)
+	. = ..()
+	if(. && iscarbon(user) && intentional)
+		var/mob/living/carbon/C = user
+		if(C.has_status_effect(/datum/status_effect/knot_fucked_stupid)) // knot so good it got me screaming
+			C.remove_status_effect(/datum/status_effect/knot_fucked_stupid)
+			to_chat(C, span_notice("I feel relaxed now that I've screamed."))
+	return .
+
 /atom/movable/screen/alert/status_effect/knot_fucked_stupid
 	name = "Fucked Stupid"
-	desc = "Mmmph I can't think straight..."
+	desc = "Mmmph I can't think straight, I need to SCREAM to rid these urges!" // a hint to the player, emote SCREAM for the debuff to be removed
 
 /datum/status_effect/knot_gaped
 	id = "knot_gaped"
