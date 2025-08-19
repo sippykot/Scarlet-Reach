@@ -43,21 +43,13 @@
 
 /datum/sex_controller/New(mob/living/carbon/human/owner)
 	user = owner
-	knotted_owner = null
-	knotted_recipient = null
-	knotted_status = KNOTTED_NULL
-	tugging_knot = FALSE
 
 /datum/sex_controller/Destroy()
 	//remove_from_target_receiving()
 	user = null
 	target = null
 	if(knotted_status)
-		knot_remove(notify = FALSE)
-	knotted_owner = null
-	knotted_recipient = null
-	knotted_status = KNOTTED_NULL
-	tugging_knot = FALSE
+		knot_exit()
 	//receiving = list()
 	. = ..()
 
@@ -251,7 +243,6 @@
 	playsound(get_turf(top), 'sound/vo/male/tomscream.ogg', 80, TRUE)
 	to_chat(top, span_userdanger("You feel a sharp pain as your knot is torn asunder!"))
 	to_chat(btm, span_userdanger("You feel their knot withdraw faster than you can process!"))
-	top.emote("paincrit", forced = TRUE)
 	knot_remove(forceful_removal = TRUE, notify = FALSE)
 	log_combat(btm, top, "Top had their cock ripped off (knot tugged too far)")
 	return TRUE
@@ -277,8 +268,8 @@
 /datum/sex_controller/proc/knot_movement_top()
 	var/mob/living/carbon/human/top = knotted_owner
 	var/mob/living/carbon/human/btm = knotted_recipient
-	if(!btm || !ishuman(btm) || QDELETED(btm) || !top || !ishuman(top) || QDELETED(top))
-		knot_remove(notify = FALSE)
+	if(!ishuman(btm) || QDELETED(btm) || !ishuman(top) || QDELETED(top))
+		knot_exit()
 		return
 	if(isnull(top.client) || !top.client?.prefs.sexable || isnull(btm.client) || !btm.client?.prefs.sexable) // we respect safewords here, let the players untie themselves
 		knot_remove()
@@ -320,7 +311,7 @@
 /datum/sex_controller/proc/knot_movement_top_after()
 	var/mob/living/carbon/human/top = knotted_owner
 	var/mob/living/carbon/human/btm = knotted_recipient
-	if(!btm || !ishuman(btm) || QDELETED(btm) || !top || !ishuman(top) || QDELETED(top))
+	if(!ishuman(btm) || QDELETED(btm) || !ishuman(top) || QDELETED(top))
 		return
 	btm.face_atom(top)
 	top.set_pull_offsets(btm, GRAB_AGGRESSIVE)
@@ -340,8 +331,8 @@
 /datum/sex_controller/proc/knot_movement_btm()
 	var/mob/living/carbon/human/top = knotted_owner
 	var/mob/living/carbon/human/btm = knotted_recipient
-	if(!btm || !ishuman(btm) || QDELETED(btm) || !top || !ishuman(top) || QDELETED(top))
-		knot_remove(notify = FALSE)
+	if(!ishuman(btm) || QDELETED(btm) || !ishuman(top) || QDELETED(top))
+		knot_exit()
 		return
 	if(isnull(top.client) || !top.client?.prefs.sexable || isnull(btm.client) || !btm.client?.prefs.sexable) // we respect safewords here, let the players untie themselves
 		knot_remove()
@@ -383,14 +374,14 @@
 /datum/sex_controller/proc/knot_movement_btm_after()
 	var/mob/living/carbon/human/top = knotted_owner
 	var/mob/living/carbon/human/btm = knotted_recipient
-	if(!btm || !ishuman(btm) || QDELETED(btm) || !top || !ishuman(top) || QDELETED(top))
+	if(!ishuman(btm) || QDELETED(btm) || !ishuman(top) || QDELETED(top))
 		return
 	btm.face_atom(top)
 
 /datum/sex_controller/proc/knot_remove(forceful_removal = FALSE, notify = TRUE, keep_top_status = FALSE, keep_btm_status = FALSE)
 	var/mob/living/carbon/human/top = knotted_owner
 	var/mob/living/carbon/human/btm = knotted_recipient
-	if(btm && ishuman(btm) && !QDELETED(btm) && top && ishuman(top) && !QDELETED(top))
+	if(ishuman(btm) && !QDELETED(btm) && ishuman(top) && !QDELETED(top))
 		if(forceful_removal)
 			var/damage = 40
 			if (top.sexcon.arousal > MAX_AROUSAL / 2) // still hard, let it rip like a beyblade
@@ -412,7 +403,12 @@
 			btm.emote("painmoan", forced = TRUE)
 			btm.sexcon.try_do_pain_effect(PAIN_MILD_EFFECT, FALSE)
 		add_cum_floor(get_turf(btm))
-	if(top && top.sexcon.knotted_status)
+	knot_exit(keep_top_status, keep_btm_status)
+
+/datum/sex_controller/proc/knot_exit(var/keep_top_status = FALSE, var/keep_btm_status = FALSE)
+	var/mob/living/carbon/human/top = knotted_owner
+	var/mob/living/carbon/human/btm = knotted_recipient
+	if(top && top?.sexcon.knotted_status)
 		if(!keep_top_status) // only keep the status if we're reapplying the knot
 			top.remove_status_effect(/datum/status_effect/knotted)
 		UnregisterSignal(top.sexcon.user, COMSIG_MOVABLE_MOVED)
@@ -420,7 +416,7 @@
 		top.sexcon.knotted_recipient = null
 		top.sexcon.knotted_status = KNOTTED_NULL
 		log_combat(top, top, "Stopped knot tugging")
-	if(btm && btm.sexcon.knotted_status)
+	if(btm && btm?.sexcon.knotted_status)
 		if(!keep_btm_status) // only keep the status if we're reapplying the knot
 			btm.remove_status_effect(/datum/status_effect/knot_tied)
 		UnregisterSignal(btm.sexcon.user, COMSIG_MOVABLE_MOVED)
