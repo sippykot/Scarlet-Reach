@@ -874,6 +874,7 @@
 		return
 	if(knotted_status)
 		knot_remove()
+		return
 	// Set vars
 	desire_stop = FALSE
 	current_action = action_type
