@@ -1065,6 +1065,6 @@
 		if(SEX_FORCE_EXTREME)
 			return "<span class='love_extreme'>[string]</span>"
 
-#undef KNOTTED_NOT
+#undef KNOTTED_NULL
 #undef KNOTTED_AS_TOP
 #undef KNOTTED_AS_BTM
