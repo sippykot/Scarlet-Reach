@@ -463,11 +463,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/knot_fucked_stupid
 	effectedstats = list("intelligence" = -10)
 
-/datum/status_effect/knot_fucked_stupid/on_apply()
-	if(owner.compliance)
-		duration *= 5 // set to 10 minutes because this twink is some needy bitch
-	return ..()
-
 /atom/movable/screen/alert/status_effect/knot_fucked_stupid
 	name = "Fucked Stupid"
 	desc = "Mmmph I can't think straight..."
