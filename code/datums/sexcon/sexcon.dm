@@ -257,11 +257,11 @@
 	var/mob/living/carbon/human/user = mover
 	switch(user.sexcon.knotted_status)
 		if(KNOTTED_AS_TOP)
-			addtimer(CALLBACK(user.sexcon, PROC_REF(knot_movement_top)), 0)
+			addtimer(CALLBACK(user.sexcon, PROC_REF(knot_movement_top)), 1)
 		if(KNOTTED_AS_BTM)
 			if(user.sexcon.tugging_knot) // we're currently moving the bottom back to the top, don't run proc until we've finished
 				return
-			addtimer(CALLBACK(user.sexcon, PROC_REF(knot_movement_btm)), 0)
+			addtimer(CALLBACK(user.sexcon, PROC_REF(knot_movement_btm)), 1)
 		if(KNOTTED_NULL) // this should never hit, but if it does remove callback
 			UnregisterSignal(user.sexcon.user, COMSIG_MOVABLE_MOVED)
 
