@@ -212,10 +212,10 @@
 	user.sexcon.knotted_owner = user
 	user.sexcon.knotted_recipient = target
 	user.sexcon.knotted_status = KNOTTED_AS_TOP
+	user.sexcon.tugging_knot_blocked = FALSE
 	target.sexcon.knotted_owner = user
 	target.sexcon.knotted_recipient = target
 	target.sexcon.knotted_status = KNOTTED_AS_BTM
-	target.sexcon.tugging_knot_blocked = FALSE
 	log_combat(user, target, "Started knot tugging")
 	if(force > SEX_FORCE_MID) // if using force above default
 		if(force == SEX_FORCE_EXTREME) // damage if set to max force
@@ -323,6 +323,7 @@
 				top.Knockdown(10)
 				to_chat(top, span_warning("I trip trying to move while my knot is covered."))
 				top.sexcon.tugging_knot_blocked = FALSE // reset blocked state in the case either character stip off again
+				top.sexcon.tugging_knot_check = 0 // check clothes again on the next step
 			top.Stun(15)
 	if(!btm.IsStun())
 		if(prob(5))
