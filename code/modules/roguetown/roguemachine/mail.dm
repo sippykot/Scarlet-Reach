@@ -165,12 +165,12 @@
 			else
 				if(!send2place)
 					return
-				var/foundtarget = FALSE
+				var/mob/living/carbon/human/mailrecipient = null
 				for(var/mob/living/carbon/human/H in GLOB.human_list)
 					if(H.real_name == send2place)
-						foundtarget = TRUE
+						mailrecipient = H
 						break
-				if(!foundtarget && (alert("Could not find recipient [send2place]. Still send the letter?", "", "Yes", "No") == "No")) // ask player if they still want to send a letter to a non-found character
+				if(!mailrecipient && (alert("Could not find recipient [send2place]. Still send the letter?", "", "Yes", "No") == "No")) // ask player if they still want to send a letter to a non-found character
 					return
 				var/findmaster
 				if(SSroguemachine.hermailermaster)
@@ -191,10 +191,9 @@
 					visible_message(span_warning("[user] sends something."))
 					playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 					send_ooc_note("New letter from <b>[sentfrom].</b>", name = send2place)
-					for(var/mob/living/carbon/human/H in GLOB.human_list)
-						if(H.real_name == send2place)
-							H.apply_status_effect(/datum/status_effect/ugotmail)
-							H.playsound_local(H, 'sound/misc/mail.ogg', 100, FALSE, -1)
+					if(mailrecipient)
+						mailrecipient.apply_status_effect(/datum/status_effect/ugotmail)
+						mailrecipient.playsound_local(mailrecipient, 'sound/misc/mail.ogg', 100, FALSE, -1)
 					return
 	if(istype(P, /obj/item/roguecoin))
 		if(coin_loaded)
