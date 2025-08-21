@@ -170,7 +170,7 @@
 					if(H.real_name == send2place)
 						mailrecipient = H
 						break
-				if(!mailrecipient && (alert("Could not find recipient [send2place]. Still send the letter?", "", "Yes", "No") == "No")) // ask player if they still want to send a letter to a non-found character
+				if(!mailrecipient && (alert("Could not find recipient [send2place]. Still send the letter?", "", "YES", "NO") == "NO")) // ask player if they still want to send a letter to a non-found character
 					return
 				var/findmaster
 				if(SSroguemachine.hermailermaster)
