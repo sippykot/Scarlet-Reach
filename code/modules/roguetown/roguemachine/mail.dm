@@ -306,6 +306,10 @@
 			PA.cached_mailedto = null
 			PA.update_icon()
 			to_chat(user, span_warning("I carefully re-seal the letter and place it back in the machine, no one will know."))
+		if(PA.mailer && PA.mailedto)
+			for(var/mob/living/carbon/human/H in GLOB.human_list)
+				if(H.real_name == PA.mailedto && !H.has_status_effect(/datum/status_effect/ugotmail)) // quietly readd the status if they tried to check their mail while the letter was being spied on
+					H.apply_status_effect(/datum/status_effect/ugotmail)
 		P.forceMove(loc)
 		var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 		STR.handle_item_insertion(P, prevent_warning=TRUE)
