@@ -139,7 +139,7 @@
 	if(istype(P, /obj/item/paper) || istype(P, /obj/item/smallDelivery))
 		if(alert(user, "Send Mail?",,"YES","NO") == "YES")
 			var/send2place = input(user, "Where to? (Person or #number)", "SCARLET REACH", null)
-			var/sentfrom = input(user, "Who is this from?", "SCARLET REACH", null)
+			var/sentfrom = input(user, "Who is this from? (Leave blank to send anonymously)", "SCARLET REACH", null)
 			if(!sentfrom)
 				sentfrom = "Anonymous"
 			if(findtext(send2place, "#"))
