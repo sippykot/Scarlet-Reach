@@ -28,7 +28,7 @@
 					say("You have additional mail available.")
 					break
 		if(!any_additional_mail(M, H.real_name))
-			if(!addl_mail && H.has_status_effect(/datum/status_effect/ugotmail)) // we apparently got mail, but never got mail (hint: it was stolen by someone with acess to the master mailer)
+			if(!addl_mail && H.has_status_effect(/datum/status_effect/ugotmail)) // we apparently got mail, but never got mail (hint: it was stolen by someone with access to the master mailer)
 				to_chat(user, span_notice("I look inside the machine and find no letter, how strange."))
 			H.remove_status_effect(/datum/status_effect/ugotmail)
 
