@@ -165,6 +165,13 @@
 			else
 				if(!send2place)
 					return
+				var/foundtarget = FALSE
+				for(var/mob/living/carbon/human/H in GLOB.human_list)
+					if(H.real_name == send2place)
+						foundtarget = TRUE
+						break
+				if(!foundtarget && (alert("Could not find recipient [send2place]. Still send the letter?", "", "Yes", "No") == "No")) // ask player if they still want to send a letter to a non-found character
+					return
 				var/findmaster
 				if(SSroguemachine.hermailermaster)
 					var/obj/item/roguemachine/mastermail/X = SSroguemachine.hermailermaster
