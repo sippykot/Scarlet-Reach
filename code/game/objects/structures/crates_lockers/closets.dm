@@ -351,7 +351,8 @@
 		pickchance *= P.picklvl
 		pickchance = clamp(pickchance, 1, 95)
 
-
+		var/picked = FALSE
+		user.log_message("attempting to lockpick closet \"[src.name]\" (currently [locked ? "locked" : "unlocked"]).", LOG_ATTACK)
 
 		while(!QDELETED(I) &&(lockprogress < locktreshold))
 			if(!do_after(user, picktime, target = src))
@@ -366,6 +367,7 @@
 					to_chat(user, "<span class='deadsay'>The locking mechanism gives.</span>")
 					record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 					GLOB.scarlet_round_stats[STATS_LOCKS_PICKED]++
+					user.log_message("finished lockpicking closet \"[src.name]\" (now [locked ? "unlocked" : "locked"]).", LOG_ATTACK)
 					togglelock(user)
 					break
 				else
@@ -376,6 +378,8 @@
 				to_chat(user, "<span class='warning'>Clack.</span>")
 				add_sleep_experience(L, /datum/skill/misc/lockpicking, L.STAINT/4)
 				continue
+		if(!picked)
+			user.log_message("stopped/failed lockpicking closet \"[src.name]\" (remains [locked ? "locked" : "unlocked"]).", LOG_ATTACK)
 		return
 
 /obj/structure/closet/proc/tool_interact(obj/item/W, mob/user)//returns TRUE if attackBy call shouldnt be continued (because tool was used/closet was of wrong type), FALSE if otherwise
@@ -395,6 +399,7 @@
 		to_chat(user, "<span class='warning'>The lock is obj_broken.</span>")
 		return
 	else
+		user.log_message("skeletonkey'd closet \"[src.name]\" (now [locked ? "unlocked" : "locked"]).", LOG_ATTACK)
 		do_sparks(3, FALSE, src)
 		playsound(user, 'sound/items/skeleton_key.ogg', 100)
 		togglelock(user) //All That It Does.
