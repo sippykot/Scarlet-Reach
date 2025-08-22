@@ -33,7 +33,12 @@
 		if(world.time > L.last_client_interact + 0.2 SECONDS)
 			return FALSE
 
-		if(L.electrocute_act(30, src))
+		var/electrodam = 30
+		if(world.time < (L.mob_timers["kneestinger"] + 30 SECONDS))
+			electrodam = 15
+
+		if(L.electrocute_act(electrodam, src))
+			L.mob_timers["kneestinger"] = world.time
 			src.take_damage(15)
 			L.consider_ambush(always = TRUE)
 			if(L.throwing)
@@ -61,7 +66,11 @@
 	if(!isliving(movable_victim))
 		return FALSE
 	var/mob/living/victim = movable_victim
-	if(victim.electrocute_act(30, src))
+	var/electrodam = 30
+	if(world.time < (victim.mob_timers["kneestinger"] + 30 SECONDS))
+		electrodam = 15
+	if(victim.electrocute_act(electrodam, src))
+		victim.mob_timers["kneestinger"] = world.time
 		victim.emote("painscream")
 		victim.update_sneak_invis(TRUE)
 		victim.consider_ambush(always = TRUE)
