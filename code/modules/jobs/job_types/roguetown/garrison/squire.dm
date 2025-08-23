@@ -34,12 +34,7 @@
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/guard
 	neck = /obj/item/clothing/neck/roguetown/chaincoif
 	backr = /obj/item/storage/backpack/rogue/satchel
-	backpack_contents = list(
-		/obj/item/rogueweapon/huntingknife/idagger = 1,
-		/obj/item/rogueweapon/hammer/stone = 1,
-		/obj/item/storage/belt/rogue/pouch = 1,
-
-		)
+	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger = 1, /obj/item/rogueweapon/hammer/stone = 1, /obj/item/storage/belt/rogue/pouch = 1)
 	id = /obj/item/scomstone/bad/garrison
 	job_bitflag = BITFLAG_GARRISON		//Move this role to garrison section later. Shouldn't be under youngroles for transparancy they are garrison.
 
