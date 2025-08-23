@@ -2073,8 +2073,8 @@
 // WARDEN
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/antler
-	name = "wardens's 'buck' helmet"
-	desc = "A strange helmet adorned with antlers worn by the warden of the forest."
+	name = "warden 'buck' helmet"
+	desc = "A strange helmet worn by wardens of the forest - features a prominent snout that compliments the pair of antlers and makes the wearer look like a beast."
 	icon = 'icons/roguetown/clothing/special/warden.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/warden64.dmi'
 	bloody_icon = 'icons/effects/blood64.dmi'
@@ -2086,8 +2086,7 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDESNOUT
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	block2add = FOV_BEHIND
-	smeltresult = /obj/item/ingot/steel
-	smelt_bar_num = 2
+	smeltresult = null
 	experimental_inhand = FALSE
 	experimental_onhip = FALSE
 
@@ -2095,13 +2094,13 @@
 	AddComponent(/datum/component/adjustable_clothing, (HEAD|EARS|HAIR), (HIDEEARS|HIDEHAIR), null, 'sound/items/visor.ogg', null, UPD_HEAD)	//Standard helmet
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/antler/snoutless
-	name = "wardens's flatface helmet"
-	desc = "A strange helmet adorned with antlers worn by the warden of the forest."
+	name = "warden 'flatface' helmet"
+	desc = "A strange helmet adorned with antlers worn by the warden of the forest. This one has a somewhat flat visor."
 	icon_state = "wardenhelm"
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/antlerdoe
-	name = "wardens's 'doe' helmet"
-	desc = "You bottom."
+	name = "warden 'doe' helmet"
+	desc = "An especially strange helmet. Features a shortened pair of antlers, cut down to resemble handlebars, and an ornate silvered mask that replaces the normal adjustable visor, offering no protection to the face, but not restricting access to it... Has extra long padding which protects the neck, at the mere cost of the wearer's dignity."
 	icon = 'icons/roguetown/clothing/special/warden.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/warden64.dmi'
 	bloody_icon = 'icons/effects/blood64.dmi'
@@ -2112,8 +2111,7 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	flags_cover = HEADCOVERSEYES
 	block2add = FOV_BEHIND
-	smeltresult = /obj/item/ingot/steel
-	smelt_bar_num = 2
+	smeltresult = null
 	experimental_inhand = FALSE
 	experimental_onhip = FALSE
 
