@@ -461,8 +461,8 @@
 	armor_class = ARMOR_CLASS_LIGHT
 
 /obj/item/clothing/suit/roguetown/armor/leather/hide/warden
-	name = "warden leathers"
-	desc = "A light armor worn by the Wardens of Scarlet Reach. Far more durable than usual leather armor, and covers most of the body."
+	name = "warden leather"
+	desc = "A light armor of leather and hide worn by the Wardens of Scarlet Reach. Far more durable than usual leather armor, and covers most of the body."
 	icon = 'icons/roguetown/clothing/special/warden.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/warden.dmi'
 	icon_state = "forestleather"
@@ -471,8 +471,8 @@
 	max_integrity = 300
 
 /obj/item/clothing/suit/roguetown/armor/leather/hide/warden/upgraded
-	name = "warden brigandine"
-	desc = "Reinforced composite armor, backed with rivets and metal plates. A more robust version of the Scarler Reach Wardens' armor, but just as light - lighter than it should be, thanks to the ancient essences imbued within."
+	name = "warden studded leathers"
+	desc = "Reinforced with metal studs and padding, more robust version of the Scarler Reach Wardens' armor, but just as light - lighter than it should be, thanks to the ancient essences imbued within."
 	icon_state = "forestbrig"
 	armor = ARMOR_LEATHER_STUDDED
 	max_integrity = 350
