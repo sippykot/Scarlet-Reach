@@ -195,6 +195,8 @@
 	switch(penis.penis_type)
 		if(PENIS_TYPE_KNOTTED)
 			return TRUE
+		if(PENIS_TYPE_TAPERED_KNOTTED)
+			return TRUE
 		if(PENIS_TYPE_TAPERED_DOUBLE_KNOTTED)
 			return TRUE
 		if(PENIS_TYPE_BARBED_KNOTTED)
