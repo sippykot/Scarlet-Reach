@@ -1011,7 +1011,7 @@
 
 /obj/item/clothing/cloak/raincloak/furcloak/woad
 	name = "Warden's fur cloak"
-	desc = "Usually sewn by the very wardens that wear them, this hue of blue is made to alart denizens of the forest to their presence."
+	desc = "Usually sewn by the very wardens that wear them, this hue of blue is made to alert denizens of the forest to their presence."
 	color = "#597fb9"
 
 /obj/item/clothing/head/hooded/rainhood/furhood
