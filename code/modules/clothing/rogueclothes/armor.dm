@@ -475,7 +475,7 @@
 	desc = "Reinforced with metal studs and padding, more robust version of the Scarler Reach Wardens' armor, but just as light - lighter than it should be, thanks to the ancient essences imbued within."
 	icon_state = "forestbrig"
 	armor = ARMOR_LEATHER_STUDDED
-	max_integrity = 350
+	max_integrity = 400
 
 /obj/item/clothing/suit/roguetown/armor/leather/studded
 	name = "studded leather armor"
