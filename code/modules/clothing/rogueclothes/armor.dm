@@ -465,7 +465,16 @@
 	desc = "A light armor worn by the Wardens of Scarlet Reach. Far more durable than leather."
 	icon = 'icons/roguetown/clothing/special/warden.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/warden.dmi'
-	icon_state = "foresthide"
+	icon_state = "forestleather"
+	body_parts_covered = COVERAGE_FULL
+	max_integrity = 300
+
+/obj/item/clothing/suit/roguetown/armor/leather/hide/warden/upgraded
+	name = "todo"
+	desc = "todo"
+	icon_state = "forestbrig"
+	armor = ARMOR_LEATHER_STUDDED
+	max_integrity = 350
 
 /obj/item/clothing/suit/roguetown/armor/leather/studded
 	name = "studded leather armor"

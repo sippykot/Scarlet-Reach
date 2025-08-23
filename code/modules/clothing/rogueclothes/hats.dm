@@ -2070,13 +2070,15 @@
 	icon_state = "elven_barbute_winged"
 	item_state = "elven_barbute_winged"
 
+// WARDEN
+
 /obj/item/clothing/head/roguetown/helmet/bascinet/antler
-	name = "wardens's helmet"
+	name = "wardens's 'buck' helmet"
 	desc = "A strange helmet adorned with antlers worn by the warden of the forest."
 	icon = 'icons/roguetown/clothing/special/warden.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/warden64.dmi'
 	bloody_icon = 'icons/effects/blood64.dmi'
-	icon_state = "wardenhelm"
+	icon_state = "wardensnout"
 	adjustable = CAN_CADJUST
 	worn_x_dimension = 64
 	worn_y_dimension = 64
@@ -2091,6 +2093,29 @@
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/antler/ComponentInitialize()
 	AddComponent(/datum/component/adjustable_clothing, (HEAD|EARS|HAIR), (HIDEEARS|HIDEHAIR), null, 'sound/items/visor.ogg', null, UPD_HEAD)	//Standard helmet
+
+/obj/item/clothing/head/roguetown/helmet/bascinet/antler/snoutless
+	name = "wardens's flatface helmet"
+	desc = "A strange helmet adorned with antlers worn by the warden of the forest."
+	icon_state = "wardenhelm"
+
+/obj/item/clothing/head/roguetown/helmet/bascinet/antlerdoe
+	name = "wardens's 'doe' helmet"
+	desc = "You bottom."
+	icon = 'icons/roguetown/clothing/special/warden.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/warden64.dmi'
+	bloody_icon = 'icons/effects/blood64.dmi'
+	icon_state = "wardendoe"
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	body_parts_covered = HEAD|HAIR|EARS|EYES|NECK
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	flags_cover = HEADCOVERSEYES
+	block2add = FOV_BEHIND
+	smeltresult = /obj/item/ingot/steel
+	smelt_bar_num = 2
+	experimental_inhand = FALSE
+	experimental_onhip = FALSE
 
 //kazengite update
 /obj/item/clothing/head/roguetown/mentorhat
