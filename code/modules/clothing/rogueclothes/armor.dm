@@ -467,6 +467,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/warden.dmi'
 	icon_state = "forestleather"
 	body_parts_covered = COVERAGE_FULL
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
 	max_integrity = 300
 
 /obj/item/clothing/suit/roguetown/armor/leather/hide/warden/upgraded
