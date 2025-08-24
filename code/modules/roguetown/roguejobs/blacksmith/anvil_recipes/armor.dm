@@ -355,6 +355,15 @@
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/half/iron/goblin
 	craftdiff = 2
 */
+
+/datum/anvil_recipe/armor/iron/wardenbrig
+	name = "Warden Studded Leathers (+1 Warden Leathers, +1 Iron, +1 Essence of Wilderness)"
+	req_bar = /obj/item/ingot/iron
+	additional_items = list(/obj/item/clothing/suit/roguetown/armor/leather/hide/warden, /obj/item/ingot/iron, /obj/item/natural/cured/essence)
+	created_item = /obj/item/clothing/suit/roguetown/armor/leather/hide/warden/upgraded
+	craftdiff = 4
+	i_type = "Armor"
+
 // --------- STEEL RECIPES -----------
 
 /datum/anvil_recipe/armor/steel/helmet/psydonarmet // technically silver but who cares

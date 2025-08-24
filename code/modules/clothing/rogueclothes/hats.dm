@@ -2101,7 +2101,7 @@
 
 /obj/item/clothing/head/roguetown/helmet/bascinet/antlerdoe
 	name = "warden 'doe' helmet"
-	desc = "An especially strange helmet. Features a shortened pair of antlers, cut down to resemble handlebars, and an ornate silvered mask that replaces the normal adjustable visor, offering no protection to the face, but not restricting access to it... Has extra long padding which protects the neck, at the mere cost of the wearer's dignity."
+	desc = "An especially strange helmet. Features a shortened pair of antlers, cut down to resemble handlebars, and an ornate silvered mask that replaces the normal adjustable visor, offering no protection to the face but not restricting access to it... Has extra long padding which protects the neck, at the mere cost of the wearer's dignity."
 	icon = 'icons/roguetown/clothing/special/warden.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/warden64.dmi'
 	bloody_icon = 'icons/effects/blood64.dmi'
