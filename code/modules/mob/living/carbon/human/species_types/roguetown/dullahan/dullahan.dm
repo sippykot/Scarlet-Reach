@@ -175,7 +175,8 @@
 		"Sshanntynlan" = SKIN_COLOR_SSHANNTYNLAN,
 		"Llurth Dreir" = SKIN_COLOR_LLURTH_DREIR,
 		"Tafravma" = SKIN_COLOR_TAFRAVMA,
-		"Yuethindrynn" = SKIN_COLOR_YUETHINDRYNN
+		"Yuethindrynn" = SKIN_COLOR_YUETHINDRYNN,
+		"Koredynn" = SKIN_COLOR_KOREDYNN,
 	)
 
 /datum/species/dullahan/get_hairc_list()
