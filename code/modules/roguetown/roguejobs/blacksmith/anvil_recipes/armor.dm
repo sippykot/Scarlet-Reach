@@ -377,6 +377,13 @@
 	created_item = /obj/item/clothing/head/roguetown/helmet/sallet
 	craftdiff = 2
 
+/datum/anvil_recipe/armor/steel/helmet/klapplong
+	name = "Klappenlonger (+2 Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/roguetown/helmet/bascinet/klapplong
+	craftdiff = 5
+
 /datum/anvil_recipe/armor/steel/helmet/salletv
 	name = "Sallet Visored (+1 Steel)"
 	req_bar = /obj/item/ingot/steel
