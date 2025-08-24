@@ -40,11 +40,16 @@
 			M.show_message(message)*/
 	var/list/ghostless = get_hearers_in_view(4, user)
 	var/list/mobsinview = list()
+	var/list/mobspickable = list()
 	for(var/mob/living/L in ghostless)
-		if(L.stat == CONSCIOUS && !L.rogue_sneaking && L != user) // To those conscious only. Slightly more expensive but subtle is not spammed
+		if(L.stat == CONSCIOUS && L != user) // To those conscious only. Slightly more expensive but subtle is not spammed
 			mobsinview += L
+	for(var/mob/living/L in mobsinview)
+		if(!L.rogue_sneaking && L.name != "Unknown") // do not let hidden/unknown targets be added to list
+			mobspickable += L
+
 	var/list/emotechoice = list("Same Tile", "1-Tile Range")
-	emotechoice += mobsinview
+	emotechoice += mobspickable
 	var/choice = input(user, "Pick a target?", "Subtle Emote") in emotechoice
 	to_chat(user, "<i>[message]</i>")
 
