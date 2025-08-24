@@ -41,23 +41,20 @@
 	var/distance = 4
 	var/list/ghostless = get_hearers_in_view(distance, user)
 	var/list/mobsinview = list()
-	var/list/mobspickable = list()
+	var/list/mobspickable = list("1-Tile Range", "Same Tile")
 	for(var/mob/living/L in ghostless)
 		if(L.stat == CONSCIOUS && L != user) // To those conscious only. Slightly more expensive but subtle is not spammed
 			mobsinview += L
 			if(!L.rogue_sneaking && L.name != "Unknown") // do not let hidden/unknown targets be added to list
 				mobspickable += L
-
-	var/list/emotechoice = list("Same Tile", "1-Tile Range")
-	emotechoice += mobspickable
-	var/choice = input(user, "Pick a target?", "Subtle Emote") in emotechoice
+	var/choice = input(user, "Pick a target?", "Subtle Emote") in mobspickable
 	to_chat(user, "<i>[message]</i>")
 
 	var/user_loc
-	if(choice == "Same Tile")
-		distance = 0
-	else if(choice == "1-Tile Range")
+	if(choice == "1-Tile Range")
 		distance = 1
+	else if(choice == "Same Tile")
+		distance = 0
 	else // we picked a target
 		var/mob/living/target = choice
 		if(!isliving(target) || QDELETED(target)) // mob has since been deleted/destroyed, skip
