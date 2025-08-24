@@ -38,8 +38,40 @@
 		var/T = get_turf(user)
 		if(M.stat == DEAD && M.client && (M.client.prefs?.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(T, null)))
 			M.show_message(message)*/
-	var/list/ghostless = get_hearers_in_view(1, user)
+	var/list/ghostless = get_hearers_in_view(4, user)
+	var/list/mobsinview = list()
 	for(var/mob/living/L in ghostless)
-		if(L.stat == CONSCIOUS) // To those conscious only. Slightly more expensive but subtle is not spammed
-			to_chat(L, "<i>[message]</i>")
+		if(L.stat == CONSCIOUS && !L.rogue_sneaking && L != user) // To those conscious only. Slightly more expensive but subtle is not spammed
+			mobsinview += L
+	var/list/emotechoice = list("Same Tile", "1-Tile Range")
+	emotechoice += mobsinview
+	var/choice = input(user, "Pick a target?", "Subtle Emote") in emotechoice
+	to_chat(user, "<i>[message]</i>")
 
+	var/distance
+	var/user_loc
+	if(choice == "Same Tile")
+		distance = 0
+	else if(choice == "1-Tile Range")
+		distance = 1
+	else // we picked a target
+		distance = 4
+		var/mob/living/target = choice
+		if(!isliving(target) || QDELETED(target)) // mob has since been deleted/destroyed, skip
+			to_chat(user, span_boldwarning("The subtle emote target no longer exists, try again."))
+			return
+		user_loc = get_turf(user)
+		if(get_dist(get_turf(target), user_loc) <= distance)
+			to_chat(target, "<i>[message]</i>")
+		else
+			to_chat(user, span_boldwarning("The subtle emote target moved out of view, try again."))
+		return
+
+	if(!mobsinview.len) // nobody to target, don't test distance
+		return
+	user_loc = get_turf(user)
+	for(var/mob/living/L in mobsinview)
+		if(!isliving(L) || QDELETED(L)) // mob has since been deleted/destroyed, skip
+			continue
+		if(get_dist(get_turf(L), user_loc) <= distance)
+			to_chat(L, "<i>[message]</i>")
