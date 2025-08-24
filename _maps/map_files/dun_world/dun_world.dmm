@@ -9906,10 +9906,9 @@
 /area/rogue/under/town/sewer)
 "dlN" = (
 /obj/structure/closet/crate/chest/wicker,
-/obj/item/paper/scroll,
-/obj/item/paper/scroll,
-/obj/item/paper/scroll,
-/obj/item/natural/feather,
+/obj/item/reagent_containers/food/snacks/tallow,
+/obj/item/reagent_containers/food/snacks/tallow,
+/obj/item/reagent_containers/food/snacks/tallow,
 /turf/open/floor/rogue/ruinedwood{
 	icon_state = "weird1"
 	},
@@ -68703,6 +68702,18 @@
 	},
 /turf/open/floor/rogue/tile,
 /area/rogue/indoors/town/dwarfin)
+"vYS" = (
+/obj/effect/decal/wood/herringbone2{
+	dir = 8
+	},
+/obj/effect/decal/wood/herringbone2,
+/obj/structure/closet/crate/roguecloset,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/natural/feather,
+/turf/open/floor/rogue/ruinedwood/herringbone,
+/area/rogue/indoors/town)
 "vZc" = (
 /obj/structure/bookcase/random/archive{
 	density = 0;
@@ -73215,7 +73226,7 @@
 /area/rogue/outdoors/mountains)
 "xsZ" = (
 /obj/machinery/tanningrack,
-/obj/item/needle/thorn,
+/obj/item/needle,
 /turf/open/floor/rogue/ruinedwood{
 	icon_state = "weird1"
 	},
@@ -364874,7 +364885,7 @@ eyz
 phl
 uuD
 ois
-cEY
+vYS
 phl
 bzY
 bSF
