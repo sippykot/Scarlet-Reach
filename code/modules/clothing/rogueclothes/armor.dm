@@ -461,7 +461,7 @@
 	armor_class = ARMOR_CLASS_LIGHT
 
 /obj/item/clothing/suit/roguetown/armor/leather/hide/warden
-	name = "warden leather"
+	name = "warden leathers"
 	desc = "A light armor of leather and hide worn by the Wardens of Scarlet Reach. Far more durable than usual leather armor, and covers most of the body. Some wardens have smiths reinforce them with iron studs and imbue them with the wilderness essence..."
 	icon = 'icons/roguetown/clothing/special/warden.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/warden.dmi'
