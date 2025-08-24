@@ -29131,6 +29131,8 @@
 /obj/item/clothing/cloak/raincloak/furcloak/woad,
 /obj/item/clothing/cloak/raincloak/furcloak/woad,
 /obj/item/clothing/suit/roguetown/armor/gambeson/heavy,
+/obj/item/clothing/suit/roguetown/armor/gambeson/heavy,
+/obj/item/clothing/suit/roguetown/armor/chainmail/iron,
 /obj/item/clothing/suit/roguetown/armor/chainmail/iron,
 /turf/open/floor/rogue/ruinedwood{
 	dir = 1;
@@ -34847,8 +34849,6 @@
 /obj/item/clothing/neck/roguetown/chaincoif/iron,
 /obj/item/clothing/neck/roguetown/coif,
 /obj/item/clothing/neck/roguetown/coif,
-/obj/item/clothing/neck/roguetown/chaincoif/chainmantle/iron,
-/obj/item/clothing/neck/roguetown/chaincoif/chainmantle/iron,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
 "llb" = (
@@ -57609,17 +57609,15 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve,
 /obj/item/quiver/arrows,
 /obj/item/quiver/arrows,
-/obj/item/quiver/arrows,
-/obj/item/quiver/javelin/iron,
 /obj/effect/decal/cobbleedge{
 	dir = 1;
 	icon_state = "borderfall"
 	},
-/obj/machinery/light/rogue/torchholder/r{
-	dir = 4
-	},
+/obj/item/quiver/arrows,
+/obj/item/quiver/javelin/iron,
 /obj/item/quiver/javelin/iron,
 /obj/item/storage/belt/rogue/leather/knifebelt/black/iron,
+/obj/machinery/light/rogue/torchholder/l,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
 "svK" = (
