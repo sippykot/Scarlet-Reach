@@ -120,6 +120,8 @@
 		"Tafravma-kin" = SKIN_COLOR_TAFRAVMA,
 		"Yuethindrynn-kin" = SKIN_COLOR_YUETHINDRYNN,
 		"Koredynn-kin" = SKIN_COLOR_KOREDYNN,
+		"Aiseedrynn-kin" = SKIN_COLOR_AISEEDRYNN,
+		"Grenduskra-kin" = SKIN_COLOR_GRENDUSKRA
 	)
 
 /datum/species/human/halfelf/proc/languages(mob/living/carbon/human/literally_him)
