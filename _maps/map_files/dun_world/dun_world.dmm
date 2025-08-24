@@ -45234,6 +45234,8 @@
 /obj/item/fishingrod,
 /obj/item/fishingrod,
 /obj/item/rogueweapon/huntingknife,
+/obj/item/restraints/legcuffs/beartrap,
+/obj/item/restraints/legcuffs/beartrap,
 /turf/open/floor/rogue/ruinedwood{
 	icon_state = "weird1"
 	},
@@ -73382,6 +73384,7 @@
 	},
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/clothing/neck/roguetown/psicross/dendor,
+/obj/item/rogue/instrument/flute,
 /turf/open/floor/rogue/ruinedwood{
 	dir = 1;
 	icon_state = "vertw"
