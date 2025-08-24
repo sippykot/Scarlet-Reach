@@ -44,9 +44,8 @@
 	for(var/mob/living/L in ghostless)
 		if(L.stat == CONSCIOUS && L != user) // To those conscious only. Slightly more expensive but subtle is not spammed
 			mobsinview += L
-	for(var/mob/living/L in mobsinview)
-		if(!L.rogue_sneaking && L.name != "Unknown") // do not let hidden/unknown targets be added to list
-			mobspickable += L
+			if(!L.rogue_sneaking && L.name != "Unknown") // do not let hidden/unknown targets be added to list
+				mobspickable += L
 
 	var/list/emotechoice = list("Same Tile", "1-Tile Range")
 	emotechoice += mobspickable
