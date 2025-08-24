@@ -408,10 +408,6 @@
 /obj/effect/spawner/lootdrop/roguetown/dungeon/tools,
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/indoors/shelter)
-"ahw" = (
-/obj/item/clothing/neck/roguetown/collar/leather,
-/turf/open/floor/rogue/cobblerock,
-/area/rogue/indoors/town)
 "ahC" = (
 /obj/machinery/light/rogue/firebowl/stump,
 /turf/open/floor/rogue/naturalstone,
@@ -44145,7 +44141,6 @@
 /obj/item/rope/chain,
 /obj/item/leash/chain,
 /obj/item/clothing/neck/roguetown/collar/leather,
-/obj/item/natural/cloth,
 /obj/item/natural/cloth,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/town)
@@ -248262,7 +248257,7 @@ hzG
 hzG
 hzG
 jSt
-ahw
+iYc
 ssK
 gkv
 iEx
