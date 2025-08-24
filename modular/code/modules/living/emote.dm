@@ -38,7 +38,8 @@
 		var/T = get_turf(user)
 		if(M.stat == DEAD && M.client && (M.client.prefs?.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(T, null)))
 			M.show_message(message)*/
-	var/list/ghostless = get_hearers_in_view(4, user)
+	var/distance = 4
+	var/list/ghostless = get_hearers_in_view(distance, user)
 	var/list/mobsinview = list()
 	var/list/mobspickable = list()
 	for(var/mob/living/L in ghostless)
@@ -52,14 +53,12 @@
 	var/choice = input(user, "Pick a target?", "Subtle Emote") in emotechoice
 	to_chat(user, "<i>[message]</i>")
 
-	var/distance
 	var/user_loc
 	if(choice == "Same Tile")
 		distance = 0
 	else if(choice == "1-Tile Range")
 		distance = 1
 	else // we picked a target
-		distance = 4
 		var/mob/living/target = choice
 		if(!isliving(target) || QDELETED(target)) // mob has since been deleted/destroyed, skip
 			to_chat(user, span_boldwarning("The subtle emote target no longer exists, try again."))
