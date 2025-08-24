@@ -1079,6 +1079,13 @@
 	},
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/town)
+"arw" = (
+/obj/structure/mineral_door/bars{
+	locked = 1;
+	lockid = "warden"
+	},
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/town)
 "arz" = (
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/rogue/churchbrick,
@@ -14387,6 +14394,10 @@
 /obj/machinery/light/rogue/firebowl/stump,
 /turf/open/floor/rogue/grassred,
 /area/rogue/indoors/shelter/woods)
+"eHF" = (
+/obj/structure/bars,
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors/town)
 "eHJ" = (
 /obj/machinery/light/rogue/firebowl,
 /turf/open/floor/rogue/dirt,
@@ -249618,7 +249629,7 @@ uBc
 phl
 xwx
 glK
-dra
+arw
 bah
 phl
 phl
@@ -250070,7 +250081,7 @@ phl
 phl
 lQC
 dra
-dra
+eHF
 phl
 phl
 fwD
