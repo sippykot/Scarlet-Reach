@@ -58067,15 +58067,6 @@
 /obj/structure/spider/stickyweb,
 /turf/open/water/swamp,
 /area/rogue/under/town/sewer)
-"sFo" = (
-/obj/structure/mineral_door/wood{
-	locked = 1;
-	lockid = "warden";
-	name = "warden's watchtower"
-	},
-/obj/item/clothing/neck/roguetown/collar/leather,
-/turf/open/floor/rogue/cobble,
-/area/rogue/indoors/town)
 "sFs" = (
 /obj/structure/flora/roguegrass/bush/wall,
 /turf/closed/wall/mineral/rogue/wooddark,
@@ -249172,7 +249163,7 @@ rYg
 uBc
 phl
 phl
-sFo
+mLN
 phl
 pLh
 phl
