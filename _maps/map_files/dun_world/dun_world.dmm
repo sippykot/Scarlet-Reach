@@ -57620,14 +57620,15 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve,
 /obj/item/quiver/arrows,
 /obj/item/quiver/arrows,
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
 /obj/item/quiver/arrows,
 /obj/item/quiver/javelin/iron,
 /obj/item/quiver/javelin/iron,
 /obj/item/storage/belt/rogue/leather/knifebelt/black/iron,
+/obj/item/storage/belt/rogue/leather/knifebelt/black/iron,
+/obj/effect/decal/cobbleedge{
+	dir = 1;
+	icon_state = "borderfall"
+	},
 /obj/machinery/light/rogue/torchholder/l,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
